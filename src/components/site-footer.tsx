@@ -28,17 +28,17 @@ export function SiteFooter() {
               build or growth marketing — tell us what you&apos;re building.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="/enquiry"
-              className="group inline-flex h-10 items-center gap-2 rounded-full bg-sg-red px-5 text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.7)]"
+              className="group inline-flex h-10 w-full items-center justify-center gap-2 rounded-full bg-sg-red px-5 text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.7)] sm:w-auto"
             >
               Start a conversation
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href={`mailto:${GROUP_EMAIL}`}
-              className="inline-flex h-10 items-center gap-2 rounded-full border border-white/25 px-5 text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-sg-black"
+              className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-white/25 px-5 text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-sg-black sm:w-auto"
             >
               <Mail className="h-4 w-4" />
               {GROUP_EMAIL}

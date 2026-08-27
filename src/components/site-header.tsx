@@ -15,6 +15,13 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+const mobileNavLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/companies", label: "Companies" },
+  { href: "/contact", label: "Contact" },
+];
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -45,6 +52,19 @@ export function SiteHeader() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  // A drawer opened on a phone can otherwise remain logically open if the
+  // viewport is resized to desktop, leaving the page scroll-locked.
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktopQuery.matches) setMobileOpen(false);
+    };
+
+    closeOnDesktop();
+    desktopQuery.addEventListener("change", closeOnDesktop);
+    return () => desktopQuery.removeEventListener("change", closeOnDesktop);
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -202,7 +222,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="fixed inset-0 z-40 overflow-y-auto bg-white px-6 pb-16 pt-24 lg:hidden">
           <nav className="flex flex-col gap-1">
-            {navLinks.map((link) => (
+            {mobileNavLinks.map((link) => (
               <div key={link.href}>
                 <Link
                   href={link.href}

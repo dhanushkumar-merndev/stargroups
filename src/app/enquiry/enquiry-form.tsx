@@ -91,7 +91,6 @@ export function EnquiryForm() {
   if (state.status === "success") {
     return (
       <div className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/80 bg-gradient-to-b from-white/95 via-white/85 to-white/70 p-8 sm:p-14 text-center shadow-[0_30px_90px_-20px_rgba(0,0,0,0.08),0_12px_36px_-12px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl">
-        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-400" />
         <span className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 text-emerald-600 border border-emerald-200/60 shadow-[0_8px_20px_-6px_rgba(16,185,129,0.3),inset_0_1px_0_rgba(255,255,255,1)]">
           <Check className="h-8 w-8" strokeWidth={2.5} />
         </span>
@@ -112,31 +111,16 @@ export function EnquiryForm() {
   return (
     <form
       action={formAction}
-      className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 sm:p-8 md:p-10 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.08),0_10px_30px_-10px_rgba(224,20,44,0.04),inset_0_1px_1px_rgba(255,255,255,1),inset_0_-1px_1px_rgba(0,0,0,0.02)] ring-1 ring-black/[0.04] backdrop-blur-2xl"
+      className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 sm:p-8 md:p-10 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.07),0_10px_30px_-10px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl"
     >
-      {/* Specular Top Edge Gloss Line */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-sg-red to-transparent opacity-90" />
-      <div className="pointer-events-none absolute inset-x-8 top-[2px] h-[1px] bg-gradient-to-r from-transparent via-white to-transparent" />
-
       {/* Header bar */}
-      <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/[0.06] pb-5 sm:pb-6">
-        <div>
-          <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-sg-dark-ink">
-            Project &amp; Partnership Enquiry
-          </h3>
-          <p className="mt-1 text-xs text-sg-dark-muted">
-            Directly routed to the appropriate venture team
-          </p>
-        </div>
-        <div className="self-start sm:self-auto">
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-md">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            Responses Active Today
-          </span>
-        </div>
+      <div className="mb-6 sm:mb-8 border-b border-black/[0.06] pb-5 sm:pb-6">
+        <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-sg-dark-ink">
+          Project &amp; Partnership Enquiry
+        </h3>
+        <p className="mt-1 text-xs text-sg-dark-muted">
+          Directly routed to the appropriate venture team
+        </p>
       </div>
 
       {/* Honeypot */}

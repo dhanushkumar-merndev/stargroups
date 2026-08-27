@@ -26,20 +26,6 @@ export default function EnquiryPage() {
         className="sg-gridlines pointer-events-none absolute inset-0"
       />
 
-      {/* Ambient Diffuse Light Orbs for Authentic Apple Glass Refraction */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-rose-500/10 blur-[130px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 -left-20 h-[450px] w-[450px] -translate-y-1/2 rounded-full bg-blue-500/5 blur-[150px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-10 -right-20 h-[400px] w-[400px] rounded-full bg-amber-500/10 blur-[140px]"
-      />
-
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="max-w-2xl">
           <p className="sg-eyebrow sg-eyebrow-lg mb-4 sm:mb-5 text-sg-red">Start a conversation</p>

@@ -3,6 +3,7 @@ import {
   Clapperboard,
   Code,
   Compass,
+  HardHat,
   Home,
   Landmark,
   Leaf,
@@ -30,6 +31,7 @@ const map: Record<string, LucideIcon> = {
   clapperboard: Clapperboard,
   video: Video,
   landmark: Landmark,
+  "hard-hat": HardHat,
 };
 
 export function CompanyIcon({

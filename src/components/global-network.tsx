@@ -211,7 +211,7 @@ export function GlobalNetwork({ cardRevealDelay = 2.75 }: GlobalNetworkProps) {
         { lat: 34.0, lng: -118 },// 4: MAC Reality (Los Angeles)
         { lat: 1.35, lng: 103.8 },// 5: Starline Solutions (Singapore)
         { lat: 40.7, lng: -74 }, // 6: Star Production House (New York / Global Media)
-        { lat: 37.7, lng: -122 },// 7: Star Capital Venture (Silicon Valley)
+        { lat: 37.7, lng: -122 },// 7: Star Venture Capital (Silicon Valley)
       ];
 
       const loc = targetCoords[idx % targetCoords.length];

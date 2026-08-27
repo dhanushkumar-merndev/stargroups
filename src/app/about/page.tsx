@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { AboutSection } from "@/components/about-section";
 import { Ticker } from "@/components/ticker";
 import { companies } from "@/lib/companies";
@@ -62,6 +63,52 @@ export default function AboutPage() {
 
       <Ticker />
       <AboutSection />
+
+      {/* Founder */}
+      <section className="relative bg-white py-24 lg:py-32">
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <Reveal>
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-sg-line-light bg-sg-paper-2 lg:mx-0">
+                <Image
+                  src="/abhishek-suhas.png"
+                  alt="Abhishek Suhas, Founder of Star Groups"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 90vw, 420px"
+                />
+              </div>
+            </Reveal>
+            <div>
+              <p className="sg-eyebrow mb-5 text-sg-red">The Founder</p>
+              <SplitWords
+                text="Started with one business. Built to hold many."
+                as="h2"
+                highlight={["one", "many."]}
+                className="max-w-[18ch] font-display text-3xl font-semibold text-sg-dark-ink md:text-5xl"
+              />
+              <Reveal delay={0.15}>
+                <p className="mt-6 max-w-[54ch] text-base leading-relaxed text-sg-dark-muted">
+                  Abhishek Suhas founded Star Groups on a simple bet: that the same
+                  standards of speed, honesty and accountability that make one business
+                  trustworthy could hold across an entire family of businesses. What began
+                  as a single venture grew, one company at a time, into a group spanning
+                  real estate, interiors, technology, media and growth marketing — each
+                  one independent, all built to the same standard, under one roof.
+                </p>
+              </Reveal>
+              <Reveal delay={0.25}>
+                <div className="mt-6">
+                  <p className="font-display text-lg font-semibold text-sg-dark-ink">
+                    Abhishek Suhas
+                  </p>
+                  <p className="text-sm text-sg-dark-muted">Founder, Star Groups</p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Principles */}
       <section className="relative bg-sg-paper py-24 lg:py-32">

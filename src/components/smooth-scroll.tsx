@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "lenis/dist/lenis.css";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +17,12 @@ export function getLenis() {
   return globalLenis;
 }
 
+export function refreshScroll() {
+  if (typeof window === "undefined") return;
+  globalLenis?.resize();
+  ScrollTrigger.refresh();
+}
+
 export function resetScroll(hash?: string) {
   if (typeof window === "undefined") return;
 
@@ -23,6 +31,7 @@ export function resetScroll(hash?: string) {
     const target = document.querySelector(targetHash);
     if (target) {
       if (globalLenis) {
+        globalLenis.resize();
         globalLenis.scrollTo(target as HTMLElement, { offset: -100 });
       } else {
         target.scrollIntoView();
@@ -32,6 +41,7 @@ export function resetScroll(hash?: string) {
   }
 
   if (globalLenis) {
+    globalLenis.resize();
     globalLenis.scrollTo(0, { immediate: true, force: true });
   }
   window.scrollTo(0, 0);
@@ -44,6 +54,8 @@ export function resetScroll(hash?: string) {
  * Disabled entirely when the visitor prefers reduced motion.
  */
 export function SmoothScroll() {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -57,6 +69,7 @@ export function SmoothScroll() {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
+      autoRaf: false,
     });
     globalLenis = lenis;
 
@@ -77,24 +90,70 @@ export function SmoothScroll() {
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
+      lenis.resize();
       lenis.scrollTo(target as HTMLElement, { offset: -100 });
     };
     document.addEventListener("click", onAnchorClick);
 
-    // Late-loading fonts/images change layout — recalculate once settled
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-    const settle = window.setTimeout(refresh, 600);
+    // Recalculate and resize Lenis whenever the layout changes
+    const onResize = () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", onResize);
+    window.addEventListener("load", onResize);
+
+    // ResizeObserver watches document body changes (image loads, card stacking, dynamic DOM)
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        onResize();
+      });
+      if (document.body) {
+        resizeObserver.observe(document.body);
+      }
+    }
+
+    const timer1 = window.setTimeout(onResize, 100);
+    const timer2 = window.setTimeout(onResize, 500);
+    const timer3 = window.setTimeout(onResize, 1200);
 
     return () => {
       document.removeEventListener("click", onAnchorClick);
-      window.removeEventListener("load", refresh);
-      window.clearTimeout(settle);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
+      window.clearTimeout(timer1);
+      window.clearTimeout(timer2);
+      window.clearTimeout(timer3);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
       gsap.ticker.remove(raf);
       lenis.destroy();
       globalLenis = null;
     };
   }, []);
+
+  // Handle route change: resize Lenis and ensure scroll reaches top and recalculates limits
+  useEffect(() => {
+    if (!globalLenis) return;
+    const timer = setTimeout(() => {
+      if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          globalLenis?.resize();
+          globalLenis?.scrollTo(target as HTMLElement, { offset: -100 });
+          return;
+        }
+      }
+      globalLenis?.resize();
+      globalLenis?.scrollTo(0, { immediate: true, force: true });
+      ScrollTrigger.refresh();
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return null;
 }

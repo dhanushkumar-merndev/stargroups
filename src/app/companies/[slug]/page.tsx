@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Mail, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Phone } from "lucide-react";
 import { companies, getCompany, GROUP_ADDRESS } from "@/lib/companies";
 import { CompanyLogo } from "@/components/company-logo";
 import { CountUp, Reveal, SplitWords } from "@/components/animated-text";
@@ -45,14 +45,6 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
           aria-hidden="true"
           className="sg-gridlines pointer-events-none absolute inset-0"
         />
-        {/* Oversized greek letter watermark */}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-10 right-[4vw] select-none font-display text-[26vw] font-bold leading-none text-sg-red/[0.06] lg:text-[20vw]"
-        >
-          {company.letter}
-        </span>
-
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <Link
             href="/companies"
@@ -68,9 +60,8 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
             </span>
             <div>
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-sg-red">
-                {company.letter} · {company.letterName}
+                {company.sector}
               </p>
-              <p className="text-sm text-sg-dark-muted">{company.sector}</p>
             </div>
           </div>
 
@@ -186,20 +177,11 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
               </div>
 
               {/* Direct contact, when the company publishes one */}
-              {(company.email || company.phone || company.website) && (
+              {(company.phone || company.website) && (
                 <Reveal delay={0.1}>
                   <div className="mt-10 rounded-2xl border border-sg-line-light bg-white p-7">
                     <p className="sg-eyebrow mb-5 text-sg-red">Direct line</p>
                     <div className="flex flex-col gap-3 text-sm">
-                      {company.email && (
-                        <a
-                          href={`mailto:${company.email}`}
-                          className="flex items-center gap-3 text-sg-dark-ink transition-colors hover:text-sg-red"
-                        >
-                          <Mail className="h-4 w-4 text-sg-red" />
-                          {company.email}
-                        </a>
-                      )}
                       {company.phone && (
                         <a
                           href={`tel:${company.phone.replace(/\s/g, "")}`}

@@ -76,9 +76,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${roboto.variable} ${plexMono.variable} h-full`}
+      className={`${roboto.variable} ${plexMono.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-sg-black">
+      <body className="min-h-screen flex flex-col bg-sg-black">
         <SmoothScroll />
         <SiteHeader />
         <main className="flex-1">{children}</main>

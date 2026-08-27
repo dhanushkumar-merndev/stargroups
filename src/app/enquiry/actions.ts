@@ -62,9 +62,9 @@ export async function submitEnquiry(
   const company = companies.find((c) => c.slug === interest);
   const companyName = company?.name ?? interest;
 
-  // NOTE: delivery is not wired up yet. Validated enquiries are logged
-  // server-side only. To actually deliver these, send `enquiry` from here via
-  // your email provider (Resend/SES/SMTP) or push it into the group's CRM.
+  // NOTE: email delivery is not wired up yet — see TODO.md. Validated
+  // enquiries are logged server-side only, nothing is persisted. Once an
+  // email provider (Brevo or Resend) is set up, send `enquiry` from here.
   const enquiry = {
     receivedAt: new Date().toISOString(),
     name,

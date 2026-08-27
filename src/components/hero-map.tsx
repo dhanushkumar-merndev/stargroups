@@ -32,7 +32,7 @@ export function HeroMap() {
     <div className="h-full w-full overflow-hidden rounded-[50%]">
       <Map
         center={[hub.lng, hub.lat]}
-        zoom={2.4}
+        zoom={2.77}
         theme="light"
         projection={{ type: "globe" }}
         hideLabels

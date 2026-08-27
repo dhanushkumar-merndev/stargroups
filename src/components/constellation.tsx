@@ -153,17 +153,6 @@ export function Constellation() {
                   animate={{ r: isActive ? 13 : 10 }}
                   transition={{ type: "spring", stiffness: 300, damping: 18 }}
                 />
-                <text
-                  x={n.x}
-                  y={n.y + 0.5}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  className="pointer-events-none font-mono"
-                  fill={isActive ? "#ffffff" : "#e0142c"}
-                  style={{ fontSize: 11 }}
-                >
-                  {n.letter}
-                </text>
                 <motion.text
                   x={n.labelX}
                   y={n.labelY}

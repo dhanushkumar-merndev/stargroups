@@ -168,6 +168,7 @@ export function SplitCharacters({
   delay = 0,
   stagger = 0.018,
   trigger = true,
+  animateOnMount = true,
   highlight,
 }: {
   text: string;
@@ -176,6 +177,7 @@ export function SplitCharacters({
   delay?: number;
   stagger?: number;
   trigger?: boolean;
+  animateOnMount?: boolean;
   highlight?: string[];
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -205,14 +207,14 @@ export function SplitCharacters({
   };
 
   useEffect(() => {
-    if (trigger) return;
+    if (!animateOnMount || trigger) return;
     const el = ref.current;
     if (el) animate(el);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trigger, text]);
+  }, [animateOnMount, trigger, text]);
 
   useInView(ref, (el) => {
-    if (trigger) animate(el);
+    if (animateOnMount && trigger) animate(el);
   });
 
   const words = text.split(" ");
@@ -239,7 +241,12 @@ export function SplitCharacters({
                 key={`${character}-${characterIndex}`}
                 className="inline-block overflow-hidden pb-[0.12em] align-bottom leading-[1.12]"
               >
-                <span className="sg-character-inner inline-block will-change-transform opacity-0">
+                <span
+                  className={cn(
+                    "sg-character-inner inline-block",
+                    animateOnMount && "will-change-transform opacity-0",
+                  )}
+                >
                   {character}
                 </span>
               </span>

@@ -1,13 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import {
   companies,
   GROUP_ADDRESS,
-  GROUP_EMAIL,
   GROUP_HOURS,
   GROUP_LOGO,
-  GROUP_PHONE,
 } from "@/lib/companies";
 
 export function SiteFooter() {
@@ -36,13 +34,6 @@ export function SiteFooter() {
               Start a conversation
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a
-              href={`mailto:${GROUP_EMAIL}`}
-              className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-white/25 px-5 text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-sg-black sm:w-auto"
-            >
-              <Mail className="h-4 w-4" />
-              {GROUP_EMAIL}
-            </a>
           </div>
         </div>
 
@@ -70,20 +61,6 @@ export function SiteFooter() {
             </p>
 
             <div className="mt-5 space-y-2 text-sm">
-              <a
-                href={`mailto:${GROUP_EMAIL}`}
-                className="group flex items-center gap-3 text-sg-muted transition-colors hover:text-white"
-              >
-                <Mail className="h-4 w-4 shrink-0 text-sg-red" />
-                {GROUP_EMAIL}
-              </a>
-              <a
-                href={`tel:${GROUP_PHONE.replace(/\s/g, "")}`}
-                className="group flex items-center gap-3 text-sg-muted transition-colors hover:text-white"
-              >
-                <Phone className="h-4 w-4 shrink-0 text-sg-red" />
-                {GROUP_PHONE}
-              </a>
               <p className="flex items-start gap-3 text-sg-muted">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sg-red" />
                 <span className="max-w-xs leading-relaxed">{GROUP_ADDRESS}</span>
@@ -102,11 +79,8 @@ export function SiteFooter() {
                 <li key={c.slug}>
                   <Link
                     href={`/companies/${c.slug}`}
-                    className="group flex items-center gap-2.5 text-sm text-sg-muted transition-colors hover:text-white"
+                    className="text-sm text-sg-muted transition-colors hover:text-white"
                   >
-                    <span className="w-3.5 font-mono text-[0.7rem] text-sg-red/80">
-                      {c.letter}
-                    </span>
                     {c.name}
                   </Link>
                 </li>

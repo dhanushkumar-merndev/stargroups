@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
 import { companies, GROUP_LOGO } from "@/lib/companies";
 import { cn } from "@/lib/utils";
+import { getLenis } from "@/components/smooth-scroll";
 
 const navLinks = [
   { href: "/about", label: "About" },
@@ -47,9 +48,17 @@ export function SiteHeader() {
 
   // Lock body scroll while the mobile sheet is open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    const lenis = getLenis();
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      lenis?.stop();
+    } else {
+      document.body.style.overflow = "";
+      lenis?.start();
+    }
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
     };
   }, [mobileOpen]);
 
@@ -91,17 +100,17 @@ export function SiteHeader() {
               : "border-b border-transparent bg-transparent",
         )}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-2.5 sm:px-6 sm:py-4 lg:px-10">
           {/* Brand */}
           <Link
             href="/"
             onClick={closeAll}
-            className="group flex items-center gap-2.5"
+            className="group flex items-center gap-2"
           >
             <motion.span
               whileHover={{ scale: 1.08 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="flex h-8 w-8 shrink-0 items-center justify-center"
+              className="flex h-6 w-6 shrink-0 items-center justify-center sm:h-8 sm:w-8"
             >
               <Image
                 src={GROUP_LOGO}
@@ -112,7 +121,7 @@ export function SiteHeader() {
                 className="h-full w-full object-contain"
               />
             </motion.span>
-            <span className="font-display text-[1.05rem] font-bold tracking-tight text-sg-dark-ink">
+            <span className="font-display text-[0.88rem] font-bold tracking-tight text-sg-dark-ink sm:text-[1.05rem]">
               STAR GROUPS
             </span>
           </Link>
@@ -148,7 +157,7 @@ export function SiteHeader() {
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute left-1/2 top-full w-[560px] -translate-x-1/2 pt-4"
                   >
-                    <div className="grid grid-cols-2 gap-1 rounded-2xl border border-sg-line-light bg-white/97 p-2.5 shadow-[0_30px_80px_-24px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+                    <div className="grid grid-cols-2 gap-1 rounded-2xl border border-sg-line-light bg-white p-2.5 shadow-[0_30px_80px_-24px_rgba(0,0,0,0.35)]">
                       {companies.map((c, i) => (
                         <motion.div
                           key={c.slug}
@@ -161,9 +170,6 @@ export function SiteHeader() {
                             onClick={closeAll}
                             className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-sg-paper-2"
                           >
-                            <span className="w-4 shrink-0 font-mono text-xs text-sg-red">
-                              {c.letter}
-                            </span>
                             <span className="min-w-0 flex-1">
                               <span className="block truncate text-[0.86rem] font-medium text-sg-dark-ink transition-colors group-hover:text-sg-red">
                                 {c.name}
@@ -214,7 +220,7 @@ export function SiteHeader() {
             aria-expanded={mobileOpen}
             className="text-sg-dark-ink lg:hidden"
           >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </motion.header>
@@ -245,9 +251,6 @@ export function SiteHeader() {
                   onClick={closeAll}
                   className="flex items-center gap-3 border-b border-sg-line-light py-3.5 transition-colors hover:bg-sg-paper-2"
                 >
-                  <span className="w-4 font-mono text-xs text-sg-red">
-                    {c.letter}
-                  </span>
                   <span className="flex-1">
                     <span className="block text-sm text-sg-dark-ink">{c.name}</span>
                     <span className="block text-[0.7rem] text-sg-dark-muted">{c.sector}</span>

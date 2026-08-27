@@ -61,7 +61,6 @@ export function SiteHeader() {
       if (desktopQuery.matches) setMobileOpen(false);
     };
 
-    closeOnDesktop();
     desktopQuery.addEventListener("change", closeOnDesktop);
     return () => desktopQuery.removeEventListener("change", closeOnDesktop);
   }, []);
@@ -84,10 +83,12 @@ export function SiteHeader() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-sg-line-light bg-white transition-all duration-300 lg:border-transparent lg:bg-transparent",
-          scrolled
-            ? "lg:bg-white/95 lg:backdrop-blur-xl lg:border-sg-line-light lg:shadow-[0_1px_20px_-10px_rgba(0,0,0,0.3)]"
-            : "lg:bg-gradient-to-b lg:from-white/90 lg:to-transparent",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          mobileOpen
+            ? "border-b border-sg-line-light bg-white"
+            : scrolled
+              ? "border-b border-sg-line-light bg-white/95 backdrop-blur-xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.08)]"
+              : "border-b border-transparent bg-transparent",
         )}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">

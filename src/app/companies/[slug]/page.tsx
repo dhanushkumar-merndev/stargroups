@@ -233,34 +233,34 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
       </section>
 
       {/* ---------- Prev / next ---------- */}
-      <section className="relative border-t border-sg-line-light bg-sg-paper py-16">
+      <section className="relative border-t border-sg-line-light bg-sg-paper py-8 sm:py-16">
         <LeafPattern />
-        <div className="relative mx-auto grid max-w-[1400px] gap-4 px-6 sm:grid-cols-2 lg:px-10">
+        <div className="relative mx-auto grid grid-cols-2 max-w-[1400px] gap-2.5 sm:gap-4 px-3 sm:px-6 lg:px-10">
           <Link
             href={`/companies/${prev.slug}`}
-            className="group rounded-2xl border border-sg-line-light bg-white p-7 transition-all duration-400 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
+            className="group rounded-xl sm:rounded-2xl border border-sg-line-light bg-white p-3.5 sm:p-7 transition-all duration-400 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
           >
-            <span className="flex items-center gap-2 text-xs uppercase tracking-widest text-sg-dark-muted">
-              <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
+            <span className="flex items-center gap-1.5 sm:gap-2 text-[0.62rem] sm:text-xs uppercase tracking-wider sm:tracking-widest text-sg-dark-muted">
+              <ArrowLeft className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0 transition-transform group-hover:-translate-x-1" />
               Previous
             </span>
-            <span className="mt-3 block font-display text-xl font-semibold text-sg-dark-ink transition-colors group-hover:text-sg-red">
+            <span className="mt-1.5 sm:mt-3 block font-display text-[0.82rem] sm:text-lg md:text-xl font-semibold leading-snug text-sg-dark-ink transition-colors group-hover:text-sg-red truncate">
               {prev.name}
             </span>
-            <span className="mt-1 block text-sm text-sg-dark-muted">{prev.sector}</span>
+            <span className="mt-0.5 sm:mt-1 block text-[0.65rem] sm:text-sm text-sg-dark-muted truncate">{prev.sector}</span>
           </Link>
           <Link
             href={`/companies/${next.slug}`}
-            className="group rounded-2xl border border-sg-line-light bg-white p-7 text-right transition-all duration-400 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
+            className="group rounded-xl sm:rounded-2xl border border-sg-line-light bg-white p-3.5 sm:p-7 text-right transition-all duration-400 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
           >
-            <span className="flex items-center justify-end gap-2 text-xs uppercase tracking-widest text-sg-dark-muted">
+            <span className="flex items-center justify-end gap-1.5 sm:gap-2 text-[0.62rem] sm:text-xs uppercase tracking-wider sm:tracking-widest text-sg-dark-muted">
               Next
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0 transition-transform group-hover:translate-x-1" />
             </span>
-            <span className="mt-3 block font-display text-xl font-semibold text-sg-dark-ink transition-colors group-hover:text-sg-red">
+            <span className="mt-1.5 sm:mt-3 block font-display text-[0.82rem] sm:text-lg md:text-xl font-semibold leading-snug text-sg-dark-ink transition-colors group-hover:text-sg-red truncate">
               {next.name}
             </span>
-            <span className="mt-1 block text-sm text-sg-dark-muted">{next.sector}</span>
+            <span className="mt-0.5 sm:mt-1 block text-[0.65rem] sm:text-sm text-sg-dark-muted truncate">{next.sector}</span>
           </Link>
         </div>
       </section>

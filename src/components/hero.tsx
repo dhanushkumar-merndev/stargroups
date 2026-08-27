@@ -101,6 +101,12 @@ export function Hero() {
         </motion.div>
       </div>
 
+      {/* Softly dissolve the oversized globe into the next white section. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-4 bg-gradient-to-b from-white/0 via-white/70 to-white backdrop-blur-[2px] xl:h-8"
+      />
+
       <HeroCompanyCardsMobile />
 
     </section>

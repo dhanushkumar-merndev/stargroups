@@ -10,6 +10,7 @@ import {
   Clock,
   Loader2,
   Mail,
+  MessageCircle,
   MessageSquare,
   Phone,
   ShieldCheck,
@@ -81,6 +82,16 @@ export function EnquiryForm() {
     }
   }, [state.fields]);
 
+  // Auto-open WhatsApp with pre-filled enquiry parameters when submission is successful
+  useEffect(() => {
+    if (state.status === "success" && state.whatsappUrl) {
+      const timer = setTimeout(() => {
+        window.open(state.whatsappUrl, "_blank", "noopener,noreferrer");
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [state.status, state.whatsappUrl]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -90,8 +101,8 @@ export function EnquiryForm() {
 
   if (state.status === "success") {
     return (
-      <div className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/80 bg-gradient-to-b from-white/95 via-white/85 to-white/70 p-8 sm:p-14 text-center shadow-[0_30px_90px_-20px_rgba(0,0,0,0.08),0_12px_36px_-12px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl">
-        <span className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 text-emerald-600 border border-emerald-200/60 shadow-[0_8px_20px_-6px_rgba(16,185,129,0.3),inset_0_1px_0_rgba(255,255,255,1)]">
+      <div className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/80 bg-gradient-to-b from-white/95 via-white/85 to-white/70 p-8 sm:p-12 text-center shadow-[0_30px_90px_-20px_rgba(0,0,0,0.08),0_12px_36px_-12px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl animate-in fade-in duration-300">
+        <span className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 text-emerald-600 border border-emerald-200/60 shadow-[0_8px_20px_-6px_rgba(16,185,129,0.3),inset_0_1px_0_rgba(255,255,255,1)]">
           <Check className="h-8 w-8" strokeWidth={2.5} />
         </span>
         <h2 className="font-display text-2xl font-bold text-sg-dark-ink sm:text-3xl">
@@ -100,9 +111,40 @@ export function EnquiryForm() {
         <p className="mx-auto mt-3 max-w-[44ch] text-sm leading-relaxed text-sg-dark-muted sm:text-base">
           {state.message}
         </p>
-        <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-black/[0.06] bg-white/70 px-4 py-2 text-xs font-medium text-sg-dark-muted backdrop-blur-md shadow-sm">
-          <Clock className="h-3.5 w-3.5 text-sg-red" />
-          Typical reply time: within a few business hours
+
+        {state.whatsappUrl && (
+          <div className="mt-7 flex flex-col items-center gap-3">
+            <a
+              href={state.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_-6px_rgba(16,185,129,0.45),inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 hover:bg-emerald-500 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-6px_rgba(16,185,129,0.55)] active:scale-[0.98]"
+            >
+              <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" />
+              <span>Continue to WhatsApp</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+            <p className="text-xs text-sg-dark-muted">
+              Redirecting to WhatsApp with your details… If it didn&apos;t open, click above.
+            </p>
+          </div>
+        )}
+
+        <div className="mt-8 flex flex-col items-center gap-4 border-t border-black/[0.06] pt-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-black/[0.06] bg-white/70 px-4 py-2 text-xs font-medium text-sg-dark-muted backdrop-blur-md shadow-sm">
+            <Clock className="h-3.5 w-3.5 text-sg-red" />
+            Typical reply time: within a few business hours
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              window.location.reload();
+            }}
+            className="text-xs font-medium text-sg-dark-muted transition-colors hover:text-sg-red cursor-pointer underline underline-offset-4"
+          >
+            Submit another enquiry
+          </button>
         </div>
       </div>
     );

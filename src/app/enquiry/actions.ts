@@ -1,10 +1,11 @@
 "use server";
 
-import { companies } from "@/lib/companies";
+import { companies, GROUP_PHONE } from "@/lib/companies";
 
 export type EnquiryState = {
   status: "idle" | "success" | "error";
   message?: string;
+  whatsappUrl?: string;
   errors?: Partial<Record<"name" | "email" | "phone" | "interest" | "message", string>>;
   fields?: {
     name?: string;
@@ -59,6 +60,7 @@ export async function submitEnquiry(
   }
 
   const company = companies.find((c) => c.slug === interest);
+  const companyName = company?.name ?? interest;
 
   // NOTE: delivery is not wired up yet. Validated enquiries are logged
   // server-side only. To actually deliver these, send `enquiry` from here via
@@ -68,13 +70,32 @@ export async function submitEnquiry(
     name,
     email,
     phone: phone || null,
-    company: company?.name ?? interest,
+    company: companyName,
     message,
   };
   console.log("[enquiry]", JSON.stringify(enquiry));
 
+  // Construct WhatsApp URL with pre-filled enquiry parameters
+  const whatsappNumber = GROUP_PHONE.replace(/\D/g, "");
+  const whatsappText = [
+    `*New Enquiry — Star Groups*`,
+    ``,
+    `*Name:* ${name}`,
+    `*Email:* ${email}`,
+    phone ? `*Phone:* ${phone}` : null,
+    `*Venture/Interest:* ${companyName}`,
+    ``,
+    `*Message / Requirements:*`,
+    message,
+  ]
+    .filter((line) => line !== null)
+    .join("\n");
+
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappText)}`;
+
   return {
     status: "success",
-    message: `Thanks ${name.split(" ")[0]} — your enquiry for ${company?.name} is in. We usually reply the same working day.`,
+    message: `Thanks ${name.split(" ")[0]} — your enquiry for ${companyName} is in. We usually reply the same working day.`,
+    whatsappUrl,
   };
 }

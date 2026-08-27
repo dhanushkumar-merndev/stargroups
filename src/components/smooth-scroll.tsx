@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,16 +9,48 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+let globalLenis: Lenis | null = null;
+
+export function getLenis() {
+  return globalLenis;
+}
+
+export function resetScroll(hash?: string) {
+  if (typeof window === "undefined") return;
+
+  const targetHash = hash || window.location.hash;
+  if (targetHash) {
+    const target = document.querySelector(targetHash);
+    if (target) {
+      if (globalLenis) {
+        globalLenis.scrollTo(target as HTMLElement, { offset: -100 });
+      } else {
+        target.scrollIntoView();
+      }
+      return;
+    }
+  }
+
+  if (globalLenis) {
+    globalLenis.scrollTo(0, { immediate: true, force: true });
+  }
+  window.scrollTo(0, 0);
+  ScrollTrigger.refresh();
+}
+
 /**
  * Lenis smooth scrolling, driven by GSAP's ticker so Lenis and ScrollTrigger
  * share a single rAF loop and never fight over scroll position.
  * Disabled entirely when the visitor prefers reduced motion.
  */
 export function SmoothScroll() {
-  const pathname = usePathname();
-
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Prevent the browser's native scroll restoration from fighting with Lenis
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
 
     const lenis = new Lenis({
       duration: 1.05,
@@ -27,6 +58,7 @@ export function SmoothScroll() {
       smoothWheel: true,
       touchMultiplier: 1.6,
     });
+    globalLenis = lenis;
 
     // Keep ScrollTrigger in sync with Lenis' virtual scroll position
     lenis.on("scroll", ScrollTrigger.update);
@@ -60,14 +92,9 @@ export function SmoothScroll() {
       window.clearTimeout(settle);
       gsap.ticker.remove(raf);
       lenis.destroy();
+      globalLenis = null;
     };
   }, []);
-
-  // Reset scroll and recalculate triggers on every route change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    ScrollTrigger.refresh();
-  }, [pathname]);
 
   return null;
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
 import { companies, GROUP_LOGO } from "@/lib/companies";
@@ -15,6 +16,7 @@ const navLinks = [
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,6 +25,12 @@ export function SiteHeader() {
     setMenuOpen(false);
     setMobileOpen(false);
   };
+
+  // Ensure sidebar is closed whenever the route changes
+  useEffect(() => {
+    closeAll();
+  }, [pathname]);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -56,10 +64,10 @@ export function SiteHeader() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          "fixed inset-x-0 top-0 z-50 border-b border-sg-line-light bg-white transition-all duration-300 lg:border-transparent lg:bg-transparent",
           scrolled
-            ? "bg-white/85 backdrop-blur-xl border-b border-sg-line-light shadow-[0_1px_20px_-10px_rgba(0,0,0,0.3)]"
-            : "bg-gradient-to-b from-white/90 to-transparent border-b border-transparent",
+            ? "lg:bg-white/95 lg:backdrop-blur-xl lg:border-sg-line-light lg:shadow-[0_1px_20px_-10px_rgba(0,0,0,0.3)]"
+            : "lg:bg-gradient-to-b lg:from-white/90 lg:to-transparent",
         )}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
@@ -191,62 +199,54 @@ export function SiteHeader() {
       </motion.header>
 
       {/* Mobile sheet */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 overflow-y-auto bg-white px-6 pb-16 pt-24 lg:hidden"
-          >
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.35 }}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 overflow-y-auto bg-white px-6 pb-16 pt-24 lg:hidden">
+          <nav className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <div key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={closeAll}
+                  className="block border-b border-sg-line-light py-4 font-display text-2xl text-sg-dark-ink transition-colors hover:text-sg-red"
                 >
-                  <Link
-                    href={link.href}
-                    onClick={closeAll}
-                    className="block border-b border-sg-line-light py-4 font-display text-2xl text-sg-dark-ink"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
+                  {link.label}
+                </Link>
+              </div>
+            ))}
+          </nav>
 
-            <p className="sg-eyebrow mt-10 mb-3 text-sg-red">The Companies</p>
-            <div className="flex flex-col">
-              {companies.map((c, i) => (
-                <motion.div
-                  key={c.slug}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + 0.035 * i, duration: 0.35 }}
+          <p className="sg-eyebrow mt-10 mb-3 text-sg-red">The Companies</p>
+          <div className="flex flex-col">
+            {companies.map((c) => (
+              <div key={c.slug}>
+                <Link
+                  href={`/companies/${c.slug}`}
+                  onClick={closeAll}
+                  className="flex items-center gap-3 border-b border-sg-line-light py-3.5 transition-colors hover:bg-sg-paper-2"
                 >
-                  <Link
-                    href={`/companies/${c.slug}`}
-                    onClick={closeAll}
-                    className="flex items-center gap-3 border-b border-sg-line-light py-3.5"
-                  >
-                    <span className="w-4 font-mono text-xs text-sg-red">
-                      {c.letter}
-                    </span>
-                    <span className="flex-1">
-                      <span className="block text-sm text-sg-dark-ink">{c.name}</span>
-                      <span className="block text-[0.7rem] text-sg-dark-muted">{c.sector}</span>
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <span className="w-4 font-mono text-xs text-sg-red">
+                    {c.letter}
+                  </span>
+                  <span className="flex-1">
+                    <span className="block text-sm text-sg-dark-ink">{c.name}</span>
+                    <span className="block text-[0.7rem] text-sg-dark-muted">{c.sector}</span>
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8">
+            <Link
+              href="/enquiry"
+              onClick={closeAll}
+              className="flex h-12 w-full items-center justify-center rounded-full bg-sg-red text-sm font-semibold text-white transition-all hover:bg-sg-red-bright hover:shadow-[0_8px_30px_-6px_rgba(224,20,44,0.6)]"
+            >
+              Work with us
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 }

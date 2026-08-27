@@ -11,6 +11,7 @@ import {
 import { CompanyLogo } from "@/components/company-logo";
 import { Reveal, SplitWords } from "@/components/animated-text";
 import { LeafPattern } from "@/components/leaf-pattern";
+import { EnquiryForm } from "@/app/enquiry/enquiry-form";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -23,106 +24,142 @@ const whatsapp = `https://wa.me/${GROUP_PHONE.replace(/\D/g, "")}`;
 export default function ContactPage() {
   return (
     <>
-      <section className="sg-grain relative overflow-hidden bg-white pb-20 pt-36 lg:pb-28 lg:pt-44">
+      <section className="sg-grain relative overflow-hidden bg-sg-paper pb-20 pt-36 lg:pb-28 lg:pt-44">
+        {/* Background Decorative Gridlines & Ambient Glows */}
         <div
           aria-hidden="true"
           className="sg-gridlines pointer-events-none absolute inset-0"
         />
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="sg-eyebrow mb-6 text-sg-red">Contact</p>
-          <SplitWords
-            text="Tell us what you're building."
-            as="h1"
-            trigger={false}
-            delay={0.1}
-            highlight={["building."]}
-            className="max-w-[15ch] font-display text-[clamp(2.4rem,6.5vw,4.8rem)] font-semibold text-sg-dark-ink"
-          />
-          <Reveal delay={0.3}>
-            <p className="mt-7 max-w-[54ch] text-lg leading-relaxed text-sg-dark-muted">
-              One message reaches the whole group. Tell us roughly what you need and
-              we&apos;ll put the right company in front of you — usually the same day.
-            </p>
-          </Reveal>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-1/4 h-96 w-96 rounded-full bg-rose-500/10 blur-[130px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-10 -left-20 h-[400px] w-[400px] rounded-full bg-amber-500/10 blur-[140px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 left-1/3 -translate-y-1/2 h-[450px] w-[450px] rounded-full bg-blue-500/5 blur-[150px]"
+        />
 
-          <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
-            {/* Direct channels */}
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="max-w-2xl">
+            <p className="sg-eyebrow sg-eyebrow-lg mb-4 sm:mb-5 text-sg-red">Start a conversation</p>
+            <SplitWords
+              text="Tell us what you're building."
+              as="h1"
+              trigger={false}
+              delay={0.1}
+              highlight={["building."]}
+              className="max-w-[15ch] font-display text-3xl font-bold text-sg-dark-ink sm:text-5xl lg:text-6xl"
+            />
+            <Reveal delay={0.25}>
+              <p className="mt-4 sm:mt-6 max-w-[52ch] text-base sm:text-lg leading-relaxed text-sg-dark-muted">
+                One message reaches the whole group. Tell us what you need and
+                we&apos;ll put the right venture in front of you — usually the same day.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-10 sm:mt-14 grid gap-6 sm:gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-10 xl:gap-12">
+            {/* Main Enquiry Form with Apple Glassmorphic Styling */}
             <Reveal>
-              <div className="space-y-3">
-                <a
-                  href={`mailto:${GROUP_EMAIL}`}
-                  className="group flex items-center gap-5 rounded-2xl border border-sg-line-light bg-white p-6 transition-all duration-400 hover:-translate-y-1 hover:border-sg-red hover:shadow-[0_24px_50px_-28px_rgba(224,20,44,0.5)]"
-                >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sg-red-tint text-sg-red transition-colors duration-300 group-hover:bg-sg-red group-hover:text-white">
-                    <Mail className="h-5 w-5" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs uppercase tracking-widest text-sg-dark-muted">
-                      Email
-                    </span>
-                    <span className="block truncate font-medium text-sg-dark-ink">
-                      {GROUP_EMAIL}
-                    </span>
-                  </span>
-                  <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-sg-dark-muted transition-all group-hover:text-sg-red" />
-                </a>
+              <EnquiryForm />
+            </Reveal>
 
-                <a
-                  href={`tel:${GROUP_PHONE.replace(/\s/g, "")}`}
-                  className="group flex items-center gap-5 rounded-2xl border border-sg-line-light bg-white p-6 transition-all duration-400 hover:-translate-y-1 hover:border-sg-red hover:shadow-[0_24px_50px_-28px_rgba(224,20,44,0.5)]"
-                >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sg-red-tint text-sg-red transition-colors duration-300 group-hover:bg-sg-red group-hover:text-white">
-                    <Phone className="h-5 w-5" />
-                  </span>
-                  <span>
-                    <span className="block text-xs uppercase tracking-widest text-sg-dark-muted">
-                      Phone
-                    </span>
-                    <span className="block font-medium text-sg-dark-ink">
-                      {GROUP_PHONE}
-                    </span>
-                  </span>
-                  <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-sg-dark-muted transition-all group-hover:text-sg-red" />
-                </a>
-
+            {/* Direct channels with Apple Glassmorphic styling */}
+            <Reveal delay={0.12}>
+              <div className="space-y-4">
+                {/* WhatsApp */}
                 <a
                   href={whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-5 rounded-2xl border border-sg-line-light bg-white p-6 transition-all duration-400 hover:-translate-y-1 hover:border-sg-red hover:shadow-[0_24px_50px_-28px_rgba(224,20,44,0.5)]"
+                  className="group relative flex items-center justify-between rounded-[24px] sm:rounded-[28px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 sm:p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:bg-white/95 hover:shadow-[0_24px_50px_-20px_rgba(16,185,129,0.25),inset_0_1px_0_rgba(255,255,255,1)]"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sg-red-tint text-sg-red transition-colors duration-300 group-hover:bg-sg-red group-hover:text-white">
-                    <MessageCircle className="h-5 w-5" />
-                  </span>
-                  <span>
-                    <span className="block text-xs uppercase tracking-widest text-sg-dark-muted">
-                      WhatsApp
+                  <div className="flex items-center gap-4">
+                    <span className="flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 text-emerald-600 border border-emerald-200/60 shadow-[0_4px_12px_-4px_rgba(16,185,129,0.2),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-300 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white">
+                      <MessageCircle className="h-6 w-6" />
                     </span>
-                    <span className="block font-medium text-sg-dark-ink">
-                      Message the team
-                    </span>
+                    <div>
+                      <span className="block font-mono text-[0.65rem] uppercase tracking-widest text-sg-dark-muted">
+                        Direct Chat
+                      </span>
+                      <span className="block font-display text-base font-bold text-sg-dark-ink transition-colors group-hover:text-emerald-600">
+                        Message on WhatsApp
+                      </span>
+                    </div>
+                  </div>
+                  <span className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-md">
+                    Fastest
                   </span>
-                  <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-sg-dark-muted transition-all group-hover:text-sg-red" />
                 </a>
-              </div>
-            </Reveal>
 
-            {/* Address block */}
-            <Reveal delay={0.12}>
-              <div className="rounded-2xl border border-sg-line-light bg-sg-paper p-8">
-                <p className="sg-eyebrow mb-6 text-sg-red">The office</p>
-                <p className="flex items-start gap-4 text-sg-dark-ink">
-                  <MapPin className="mt-1 h-5 w-5 shrink-0 text-sg-red" />
-                  <span className="leading-relaxed">{GROUP_ADDRESS}</span>
-                </p>
-                <p className="mt-5 flex items-center gap-4 text-sg-dark-ink">
-                  <Clock className="h-5 w-5 shrink-0 text-sg-red" />
-                  {GROUP_HOURS}
-                </p>
-                <p className="mt-6 border-t border-sg-line-light pt-5 text-sm leading-relaxed text-sg-dark-muted">
-                  Every company in the group works out of this address, so a single visit
-                  can cover a property question, an interiors quote and a marketing plan.
-                </p>
+                {/* Email */}
+                <a
+                  href={`mailto:${GROUP_EMAIL}`}
+                  className="group relative flex items-center justify-between rounded-[24px] sm:rounded-[28px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 sm:p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:border-sg-red/40 hover:bg-white/95 hover:shadow-[0_24px_50px_-20px_rgba(224,20,44,0.25),inset_0_1px_0_rgba(255,255,255,1)]"
+                >
+                  <div className="flex items-center gap-4 min-w-0 flex-1">
+                    <span className="flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sg-red-tint to-rose-100/60 text-sg-red border border-sg-red/15 shadow-[0_4px_12px_-4px_rgba(224,20,44,0.2),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-300 group-hover:scale-105 group-hover:bg-sg-red group-hover:text-white">
+                      <Mail className="h-5 w-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-mono text-[0.65rem] uppercase tracking-widest text-sg-dark-muted">
+                        Official Email
+                      </span>
+                      <span className="block truncate text-sm sm:text-base font-medium text-sg-dark-ink transition-colors group-hover:text-sg-red">
+                        {GROUP_EMAIL}
+                      </span>
+                    </span>
+                  </div>
+                  <ArrowUpRight className="ml-2 h-4 w-4 shrink-0 text-sg-dark-muted/60 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-sg-red" />
+                </a>
+
+                {/* Phone */}
+                <a
+                  href={`tel:${GROUP_PHONE.replace(/\s/g, "")}`}
+                  className="group relative flex items-center justify-between rounded-[24px] sm:rounded-[28px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 sm:p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:border-sg-red/40 hover:bg-white/95 hover:shadow-[0_24px_50px_-20px_rgba(224,20,44,0.25),inset_0_1px_0_rgba(255,255,255,1)]"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sg-red-tint to-rose-100/60 text-sg-red border border-sg-red/15 shadow-[0_4px_12px_-4px_rgba(224,20,44,0.2),inset_0_1px_0_rgba(255,255,255,1)] transition-all duration-300 group-hover:scale-105 group-hover:bg-sg-red group-hover:text-white">
+                      <Phone className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <span className="block font-mono text-[0.65rem] uppercase tracking-widest text-sg-dark-muted">
+                        Direct Phone Line
+                      </span>
+                      <span className="block font-display text-base font-bold text-sg-dark-ink transition-colors group-hover:text-sg-red">
+                        {GROUP_PHONE}
+                      </span>
+                    </div>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-sg-dark-muted/60 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-sg-red" />
+                </a>
+
+                {/* Headquarters Address Block */}
+                <div className="relative rounded-[24px] sm:rounded-[28px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-6 sm:p-7 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl">
+                  <p className="flex items-start gap-3.5 text-sm leading-relaxed text-sg-dark-ink">
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-sg-red-tint text-sg-red border border-sg-red/10">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <span className="text-sg-dark-muted">
+                      <strong className="font-semibold text-sg-dark-ink">Headquarters:</strong>{" "}
+                      {GROUP_ADDRESS}
+                    </span>
+                  </p>
+                  <div className="mt-5 border-t border-black/[0.06] pt-4">
+                    <p className="flex items-center gap-3.5 text-xs text-sg-dark-muted">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-black/[0.04] text-sg-red">
+                        <Clock className="h-3.5 w-3.5" />
+                      </span>
+                      <span>
+                        <strong className="font-semibold text-sg-dark-ink">Hours:</strong> {GROUP_HOURS}
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -130,11 +167,11 @@ export default function ContactPage() {
       </section>
 
       {/* Route to a specific company */}
-      <section className="relative border-t border-sg-line-light bg-sg-paper py-24 lg:py-28">
+      <section className="relative border-t border-sg-line-light bg-sg-paper py-20 lg:py-28">
         <LeafPattern />
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="mb-12 max-w-2xl">
-            <p className="sg-eyebrow mb-5 text-sg-red">Straight to the source</p>
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="mb-10 sm:mb-12 max-w-2xl">
+            <p className="sg-eyebrow mb-4 sm:mb-5 text-sg-red">Straight to the source</p>
             <SplitWords
               text="Or go direct to a company."
               as="h2"
@@ -143,25 +180,25 @@ export default function ContactPage() {
             />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {companies.map((c, i) => (
               <Reveal key={c.slug} delay={0.04 * (i % 3)}>
                 <Link
                   href={`/companies/${c.slug}`}
-                  className="group flex h-full items-center gap-4 rounded-2xl border border-sg-line-light bg-white p-5 transition-all duration-400 hover:-translate-y-1 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
+                  className="group relative flex h-full items-center gap-4 rounded-[22px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 shadow-[0_15px_35px_-15px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.03] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-sg-red/40 hover:bg-white/95 hover:shadow-[0_20px_40px_-20px_rgba(224,20,44,0.3),inset_0_1px_0_rgba(255,255,255,1)]"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-black/[0.03] p-1">
                     <CompanyLogo company={c} className="h-full w-full" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate font-medium text-sg-dark-ink transition-colors group-hover:text-sg-red">
+                    <span className="block truncate font-semibold text-sg-dark-ink transition-colors group-hover:text-sg-red">
                       {c.name}
                     </span>
                     <span className="block truncate text-xs text-sg-dark-muted">
                       {c.sector}
                     </span>
                   </span>
-                  <span className="shrink-0 text-sg-red transition-transform duration-300 group-hover:translate-x-1">
+                  <span className="shrink-0 font-bold text-sg-red transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
                 </Link>

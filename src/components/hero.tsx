@@ -21,7 +21,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="sg-grain relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white px-6 pb-8 pt-24 text-center xl:h-[100svh] xl:min-h-0 xl:justify-start xl:pt-52"
+      className="sg-grain relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white px-4 pb-8 pt-24 text-center sm:px-6 xl:h-[100svh] xl:min-h-0 xl:justify-start xl:pt-52"
     >
       {/* Repeating leaf motif, full-bleed across the hero */}
       <div
@@ -33,13 +33,13 @@ export function Hero() {
 
       <motion.div
         style={{ y: copyY }}
-        className="relative z-30 mx-auto flex w-full max-w-5xl flex-col items-center px-4 xl:max-w-[40rem]"
+        className="relative z-30 mx-auto flex w-full max-w-5xl flex-col items-center px-1 sm:px-4 xl:max-w-[40rem]"
       >
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7 }}
-          className="sg-eyebrow mb-3 justify-center text-sg-red"
+          className="sg-eyebrow mb-3 hidden justify-center text-sg-red md:inline-flex"
         >
           Bengaluru · Est. as a group
         </motion.p>
@@ -69,18 +69,18 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.9, duration: 0.8 }}
-          className="mt-4 flex flex-wrap items-center justify-center gap-3"
+          className="mt-4 flex w-full items-center justify-center gap-2 sm:gap-3"
         >
           <Link
             href="/companies"
-            className="group inline-flex h-10 items-center gap-2 rounded-full bg-sg-red px-5 text-[0.82rem] font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.7)]"
+            className="group inline-flex h-9 sm:h-10 shrink-0 items-center justify-center gap-1.5 sm:gap-2 rounded-full bg-sg-red px-3.5 sm:px-5 text-[0.72rem] sm:text-[0.82rem] font-semibold text-white whitespace-nowrap transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.7)]"
           >
             Explore the group
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             href="/companies/star-growth-hub"
-            className="inline-flex h-10 items-center gap-2 rounded-full border border-sg-dark-ink px-5 text-[0.82rem] font-semibold text-sg-dark-ink transition-all duration-300 hover:bg-sg-dark-ink hover:text-white"
+            className="inline-flex h-9 sm:h-10 shrink-0 items-center justify-center gap-2 rounded-full border border-sg-dark-ink px-3.5 sm:px-5 text-[0.72rem] sm:text-[0.82rem] font-semibold text-sg-dark-ink whitespace-nowrap transition-all duration-300 hover:bg-sg-dark-ink hover:text-white"
           >
             Meet Star Growth Hub
           </Link>

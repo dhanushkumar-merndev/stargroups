@@ -17,7 +17,6 @@ export function Ticker() {
         {items.map((c, i) => (
           <span key={`${c.slug}-${i}`} className="flex items-center gap-10">
             <span className="flex items-center gap-2.5">
-              <span className="font-mono text-xs text-sg-red-bright">{c.letter}</span>
               <span className="font-display text-lg font-medium text-white/90">
                 {c.name}
               </span>

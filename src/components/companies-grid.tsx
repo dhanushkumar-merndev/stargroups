@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { companies } from "@/lib/companies";
 import { CompanyLogo } from "./company-logo";
 import { Reveal, SplitWords } from "./animated-text";
@@ -14,6 +17,8 @@ export function CompaniesGrid({
   eyebrow?: string;
   intro?: string;
 }) {
+  const [showAllOnMobile, setShowAllOnMobile] = useState(false);
+
   return (
     <section className="relative bg-sg-paper py-24 lg:py-32">
       <LeafPattern />
@@ -35,7 +40,11 @@ export function CompaniesGrid({
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {companies.map((c, i) => (
-            <Reveal key={c.slug} delay={0.04 * (i % 3)}>
+            <Reveal
+              key={c.slug}
+              delay={0.04 * (i % 3)}
+              className={i > 2 && !showAllOnMobile ? "hidden sm:block" : undefined}
+            >
               <Link
                 href={`/companies/${c.slug}`}
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-sg-line-light bg-white p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-sg-red hover:shadow-[0_24px_50px_-24px_rgba(224,20,44,0.55)]"
@@ -89,6 +98,22 @@ export function CompaniesGrid({
             </Reveal>
           ))}
         </div>
+
+        {companies.length > 3 && (
+          <div className="mt-7 flex justify-center sm:hidden">
+            <button
+              type="button"
+              onClick={() => setShowAllOnMobile((visible) => !visible)}
+              aria-expanded={showAllOnMobile}
+              className="inline-flex items-center gap-2 rounded-full border border-sg-dark-ink px-5 py-2.5 text-sm font-semibold text-sg-dark-ink transition-colors hover:bg-sg-dark-ink hover:text-white"
+            >
+              {showAllOnMobile ? "Show less" : `View ${companies.length - 3} more`}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${showAllOnMobile ? "rotate-180" : ""}`}
+              />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -46,7 +46,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid gap-10 pb-12 lg:grid-cols-[1.2fr_1fr_0.7fr_1fr] lg:gap-8">
+        <div className="grid gap-10 pb-7 md:pb-12 lg:grid-cols-[1.2fr_1fr_0.7fr_1fr] lg:gap-8">
           {/* Brand + contact */}
           <div>
             <Link href="/" className="flex items-center gap-2.5">
@@ -162,7 +162,7 @@ export function SiteFooter() {
         </div>
 
         {/* Give the watermark its own space, then place the divider below it. */}
-        <div className="relative h-[clamp(7rem,11vw,13rem)] overflow-hidden">
+        <div className="relative hidden h-[clamp(7rem,11vw,13rem)] overflow-hidden md:block">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute bottom-0 left-1/2 w-max -translate-x-1/2 select-none whitespace-nowrap text-center font-display text-[10vw] font-bold leading-none tracking-[-0.07em] text-white/[0.025]"

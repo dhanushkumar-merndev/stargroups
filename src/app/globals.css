@@ -1,26 +1,214 @@
 @import "tailwindcss";
 
+/* ============================================================
+   STAR GROUPS — white primary, red + black secondary
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary surfaces — white leads */
+  --sg-white: #ffffff;
+  --sg-paper: #faf9f8;
+  --sg-paper-2: #f2f0ee;
+  --sg-line-light: #e4e1de;
+
+  /* Secondary — black */
+  --sg-black: #0a0a0b;
+  --sg-panel: #141418;
+  --sg-panel-2: #1e1e24;
+  --sg-line: #2b2b33;
+
+  /* Secondary — red */
+  --sg-red: #e0142c;
+  --sg-red-bright: #ff3049;
+  --sg-red-deep: #a80d20;
+  --sg-red-tint: #fdeef0;
+
+  /* Type on light (default) */
+  --sg-dark-ink: #0d0d10;
+  --sg-dark-muted: #63636e;
+  /* Type on dark */
+  --sg-ink: #f5f4f3;
+  --sg-muted: #9a9aa5;
+
+  --background: var(--sg-white);
+  --foreground: var(--sg-dark-ink);
+  --muted: var(--sg-paper-2);
+  --muted-foreground: var(--sg-dark-muted);
+  --border: var(--sg-line-light);
+  --ring: var(--sg-red);
+  --accent: var(--sg-red-tint);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+
+  --color-sg-white: var(--sg-white);
+  --color-sg-paper: var(--sg-paper);
+  --color-sg-paper-2: var(--sg-paper-2);
+  --color-sg-line-light: var(--sg-line-light);
+
+  --color-sg-black: var(--sg-black);
+  --color-sg-panel: var(--sg-panel);
+  --color-sg-panel-2: var(--sg-panel-2);
+  --color-sg-line: var(--sg-line);
+
+  --color-sg-red: var(--sg-red);
+  --color-sg-red-bright: var(--sg-red-bright);
+  --color-sg-red-deep: var(--sg-red-deep);
+  --color-sg-red-tint: var(--sg-red-tint);
+
+  --color-sg-ink: var(--sg-ink);
+  --color-sg-muted: var(--sg-muted);
+  --color-sg-dark-ink: var(--sg-dark-ink);
+  --color-sg-dark-muted: var(--sg-dark-muted);
+
+  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* Scale the entire UI (rem units) up to match 125% zoom by default */
+  font-size: 125%;
+  /* Lenis drives smooth scrolling; native smooth would fight it */
+  -webkit-text-size-adjust: 100%;
+  background: var(--sg-white);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--sg-white);
+  color: var(--sg-dark-ink);
+  font-family: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+}
+
+::selection {
+  background: var(--sg-red);
+  color: #fff;
+}
+
+/* Scrollbar — light track, red thumb on hover */
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--sg-paper-2); }
+::-webkit-scrollbar-thumb {
+  background: #c9c5c1;
+  border-radius: 99px;
+  border: 3px solid var(--sg-paper-2);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--sg-red); }
+
+/* ---------- Utility layers ---------- */
+
+.sg-eyebrow {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Larger variant for section-opening eyebrows */
+.sg-eyebrow-lg {
+  font-size: 0.86rem;
+  letter-spacing: 0.22em;
+}
+
+.sg-eyebrow-lg::before {
+  width: 8px;
+  height: 8px;
+}
+
+/* Largest variant — for sections where the eyebrow IS the heading */
+.sg-eyebrow-xl {
+  font-size: 1.35rem;
+  letter-spacing: 0.26em;
+  font-weight: 500;
+}
+
+.sg-eyebrow-xl::before {
+  width: 12px;
+  height: 12px;
+}
+
+.sg-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* Fine grain for depth on large white areas */
+.sg-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Shared repeating leaf motif used behind every light hero/section header.
+   Full-bleed across the section (no fade mask) so it doesn't read as a
+   faint patch surrounded by plain white on wide screens. Opacity lives here
+   rather than on the mask, so it stays quiet behind headline text. */
+.sg-gridlines {
+  background-image: url("/geometric-leaves.png");
+  background-size: 240px 240px;
+  background-repeat: repeat;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  /* Lenis is not initialised at all under reduced motion */
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@layer base {
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
+  .maplibregl-ctrl-attrib {
+    @apply bg-background! text-muted-foreground! border-border! rounded-md! border! shadow-sm!;
+  }
+  .maplibregl-ctrl-attrib a {
+    @apply text-muted-foreground!;
+  }
+  .maplibregl-ctrl-attrib a:hover {
+    @apply text-foreground!;
+  }
+  .maplibregl-ctrl-attrib-button {
+    @apply bg-transparent! dark:invert;
+  }
 }

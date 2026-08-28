@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
-import { companies, GROUP_LOGO } from "@/lib/companies";
+import { companies } from "@/lib/companies";
 import { cn } from "@/lib/utils";
 import { getLenis } from "@/components/smooth-scroll";
 
@@ -105,25 +105,23 @@ export function SiteHeader() {
           <Link
             href="/"
             onClick={closeAll}
-            className="group flex items-center gap-2"
+            aria-label="Star Groups home"
+            className="block"
           >
             <motion.span
-              whileHover={{ scale: 1.08 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="flex h-6 w-6 shrink-0 items-center justify-center sm:h-8 sm:w-8"
+              className="relative block h-10 w-40 overflow-hidden sm:h-11 sm:w-48"
             >
               <Image
-                src={GROUP_LOGO}
-                alt="Star Groups"
-                width={32}
-                height={32}
+                src="/logo.png"
+                alt=""
+                fill
+                sizes="(max-width: 640px) 160px, 192px"
                 priority
-                className="h-full w-full object-contain"
+                className="scale-[1] object-cover object-center mix-blend-multiply"
               />
             </motion.span>
-            <span className="font-display text-[0.88rem] font-bold tracking-tight text-sg-dark-ink sm:text-[1.05rem]">
-              STAR GROUPS
-            </span>
           </Link>
 
           {/* Desktop nav */}

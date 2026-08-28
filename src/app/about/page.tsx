@@ -66,10 +66,10 @@ export default function AboutPage() {
 
       {/* Founder */}
       <section className="relative bg-white py-24 lg:py-32">
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <Reveal>
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-sg-line-light bg-sg-paper-2 lg:mx-0">
+        <div className="relative mx-auto max-w-[1240px] px-6 lg:px-10">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+            <Reveal className="lg:order-2">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-sg-line-light bg-sg-paper-2 lg:ml-auto lg:mr-0">
                 <Image
                   src="/abhishek-suhas.png"
                   alt="Abhishek Suhas, Founder of Star Groups"
@@ -79,23 +79,41 @@ export default function AboutPage() {
                 />
               </div>
             </Reveal>
-            <div>
+            <div className="lg:order-1">
               <p className="sg-eyebrow mb-5 text-sg-red">The Founder</p>
               <SplitWords
-                text="Started with one business. Built to hold many."
+                text="Started with one shovel, built an empire."
                 as="h2"
-                highlight={["one", "many."]}
+                highlight={["one", "empire."]}
                 className="max-w-[18ch] font-display text-3xl font-semibold text-sg-dark-ink md:text-5xl"
               />
               <Reveal delay={0.15}>
-                <p className="mt-6 max-w-[54ch] text-base leading-relaxed text-sg-dark-muted">
-                  Abhishek Suhas founded Star Groups on a simple bet: that the same
-                  standards of speed, honesty and accountability that make one business
-                  trustworthy could hold across an entire family of businesses. What began
-                  as a single venture grew, one company at a time, into a group spanning
-                  real estate, interiors, technology, media and growth marketing — each
-                  one independent, all built to the same standard, under one roof.
-                </p>
+                <div className="mt-6 max-w-[58ch] space-y-4 text-base leading-relaxed text-sg-dark-muted">
+                  <p>
+                    Abhishek Suhas didn&apos;t inherit a conglomerate. He built one on a bet
+                    most people wouldn&apos;t take: that honesty scales, and that the same
+                    discipline which makes one business trustworthy can hold across ten
+                    without diluting.
+                  </p>
+                  <p>
+                    The proof came first, in 1982, when the Suhas family turned generations
+                    of agricultural roots into Star Gardens: 30 acres in Punganur, Andhra
+                    Pradesh, and nothing but the work to back it up. No shortcuts. No
+                    outsourcing the standard. It grew into one of the largest landscaping
+                    operations across Karnataka and Andhra Pradesh — production units,
+                    imported plant lines, and a reputation earned one client at a time.
+                  </p>
+                  <p>
+                    That wasn&apos;t the ceiling; it was the template. Real estate, interiors,
+                    technology, media, venture capital, and growth marketing — each one
+                    running its own team, its own clients, and its own bottom line. None of
+                    them waits for permission. None cuts the corner the first one refused to
+                    cut. One founder, one standard, one roof in Bengaluru.
+                  </p>
+                  <p className="font-display text-xl font-semibold text-sg-dark-ink">
+                    10 companies, and still growing.
+                  </p>
+                </div>
               </Reveal>
               <Reveal delay={0.25}>
                 <div className="mt-6">

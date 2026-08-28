@@ -6,6 +6,7 @@ import { companies, getCompany, GROUP_ADDRESS } from "@/lib/companies";
 import { CompanyLogo } from "@/components/company-logo";
 import { CountUp, Reveal, SplitWords } from "@/components/animated-text";
 import { LeafPattern } from "@/components/leaf-pattern";
+import { ProjectShowcase } from "@/components/project-showcase";
 
 export function generateStaticParams() {
   return companies.map((c) => ({ slug: c.slug }));
@@ -36,6 +37,29 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
   const index = companies.findIndex((c) => c.slug === slug);
   const next = companies[(index + 1) % companies.length];
   const prev = companies[(index - 1 + companies.length) % companies.length];
+  const projectCounts = company.projects
+    ? (company.projectCounts ?? {
+        finished: company.projects.filter((project) => project.status === "finished").length,
+        ongoing: company.projects.filter((project) => project.status === "ongoing").length,
+        upcoming: company.projects.filter((project) => project.status === "upcoming").length,
+      })
+    : null;
+  const stats = company.projects
+    ? [
+        {
+          value: String(projectCounts?.finished ?? 0),
+          label: "Finished projects",
+        },
+        {
+          value: String(projectCounts?.ongoing ?? 0),
+          label: "Ongoing projects",
+        },
+        {
+          value: String(projectCounts?.upcoming ?? 0),
+          label: "Upcoming projects",
+        },
+      ]
+    : company.stats;
 
   return (
     <>
@@ -112,12 +136,62 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
         </div>
       </section>
 
+      {/* ---------- Project gallery ---------- */}
+      {company.projects && (
+        <section className="relative bg-sg-paper py-20 lg:py-24">
+          <LeafPattern />
+          <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
+            <ProjectShowcase projects={company.projects} />
+          </div>
+        </section>
+      )}
+
+      {/* ---------- Delivery milestone ---------- */}
+      {company.milestone && (
+        <section className="relative bg-white py-20 lg:py-24">
+          <div className="mx-auto grid max-w-[1400px] gap-8 px-6 lg:grid-cols-[30rem_minmax(0,1fr)] lg:items-center lg:gap-20 lg:px-10">
+            <Reveal>
+              <div className="w-full max-w-[30rem] rounded-3xl bg-sg-dark-ink p-8 text-white sm:p-10 lg:w-[30rem]">
+                <p className="font-display text-[clamp(3.5rem,8vw,6.5rem)] font-semibold leading-none tracking-tight text-sg-red-bright">
+                  <CountUp value={company.milestone.value} />
+                </p>
+                <p className="mt-4 max-w-[16ch] text-lg leading-snug text-white/80">
+                  {company.milestone.label}
+                </p>
+              </div>
+            </Reveal>
+
+            <div>
+              <p className="sg-eyebrow mb-5 text-sg-red">Our commitment</p>
+              <SplitWords
+                text={company.milestone.title}
+                as="h2"
+                highlight={["Happy", "Families."]}
+                className="max-w-[20ch] font-display text-3xl font-semibold text-sg-dark-ink md:text-5xl"
+              />
+              <div className="mt-6 max-w-[66ch] space-y-4">
+                {company.milestone.body.map((paragraph, i) => (
+                  <Reveal key={paragraph} delay={0.08 * i}>
+                    <p className="text-base leading-relaxed text-sg-dark-muted">{paragraph}</p>
+                  </Reveal>
+                ))}
+              </div>
+              <Reveal delay={0.2}>
+                <p className="mt-7 border-t border-sg-line-light pt-5 font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.08em] text-sg-dark-ink lg:whitespace-nowrap">
+                  {company.milestone.closing}
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ---------- Stats ---------- */}
-      {company.stats.length > 0 && (
+      {stats.length > 0 && (
         <section className="border-y border-sg-line bg-sg-black py-14">
           <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
             <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-              {company.stats.map((s, i) => (
+              {stats.map((s, i) => (
                 <Reveal key={s.label} delay={0.06 * i}>
                   <div className="border-l-2 border-sg-red/40 pl-5">
                     <div className="font-display text-4xl font-semibold text-white">

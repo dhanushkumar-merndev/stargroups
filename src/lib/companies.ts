@@ -8,6 +8,32 @@
  * with that layout, or with hero-company-cards.tsx if it changes.
  */
 
+export type ProjectStatus = "finished" | "ongoing" | "upcoming";
+
+export type Project = {
+  status: ProjectStatus;
+  title: string;
+  subtitle?: string;
+  description: string;
+  images: { src: string; alt: string }[];
+  details?: {
+    title: string;
+    description?: string;
+    items?: string[];
+  }[];
+  footer?: string[];
+};
+
+export type ProjectCounts = Record<ProjectStatus, number>;
+
+export type CompanyMilestone = {
+  value: string;
+  label: string;
+  title: string;
+  body: string[];
+  closing: string;
+};
+
 export type Company = {
   slug: string;
   name: string;
@@ -38,6 +64,12 @@ export type Company = {
   logo: string;
   /** Custom visual showcase image for the stacking cards */
   stackingImage?: string;
+  /** Optional project portfolio shown on the company detail page */
+  projects?: Project[];
+  /** Published project totals; use when the full portfolio is not listed on the site yet */
+  projectCounts?: ProjectCounts;
+  /** Optional delivery milestone shown on the company detail page */
+  milestone?: CompanyMilestone;
   featured?: boolean;
 };
 
@@ -370,6 +402,279 @@ export const companies: Company[] = [
     stats: [{ value: "3", label: "Development lines" }],
     icon: "hard-hat",
     logo: "/stargroups.png",
+    projects: [
+      {
+        status: "finished",
+        title: "Star Woods Estate",
+        subtitle: "Madikeri · Premium Farmland Development",
+        description:
+          "A nature-focused farmland community surrounded by the beautiful landscape of Coorg, offering spacious agricultural plots, internal access roads and a peaceful environment for weekend homes and long-term land ownership.",
+        images: [
+          {
+            src: "/starinfradeveloper/completed/star-woods-estate-1.png",
+            alt: "Star Woods Estate farmland home in Madikeri",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-woods-estate-2.png",
+            alt: "Star Woods Estate landscape in Madikeri",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-woods-estate-3.png",
+            alt: "Star Woods Estate countryside view in Madikeri",
+          },
+        ],
+      },
+      {
+        status: "finished",
+        title: "Star Coffee County",
+        subtitle: "Madikeri · Managed Farmland",
+        description:
+          "A premium farmland project inspired by the natural character of Coorg, featuring lush plantation surroundings, individual farmland parcels, internal pathways and spaces suitable for private farm retreats.",
+        images: [
+          {
+            src: "/starinfradeveloper/completed/star-coffee-county-1.png",
+            alt: "Star Coffee County plantation retreat in Madikeri",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-coffee-county-2.png",
+            alt: "Star Coffee County farmland landscape in Madikeri",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-coffee-county-3.png",
+            alt: "Star Coffee County retreat view in Madikeri",
+          },
+        ],
+      },
+      {
+        status: "finished",
+        title: "Star Misty Acres",
+        subtitle: "Madikeri · Luxury Farmland & Weekend Retreat Development",
+        description:
+          "A scenic farmland development surrounded by greenery and the misty landscape of Coorg, planned for nature lovers seeking private land, plantation living and peaceful weekend experiences.",
+        images: [
+          {
+            src: "/starinfradeveloper/completed/star-misty-acres-1.png",
+            alt: "Star Misty Acres luxury weekend retreat in Madikeri",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-misty-acres-2.png",
+            alt: "Star Misty Acres hillside villa in Madikeri",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-misty-acres-3.png",
+            alt: "Star Misty Acres villa and pond at dusk in Madikeri",
+          },
+        ],
+      },
+      {
+        status: "finished",
+        title: "Star Meadows",
+        subtitle: "Hoskote, Bangalore · Premium Plotted Development",
+        description:
+          "A residential plotted community created for buyers looking to build independent homes in a peaceful environment while remaining connected to Bangalore's growing eastern corridor.",
+        images: [
+          {
+            src: "/starinfradeveloper/completed/star-meadows-1.png",
+            alt: "Star Meadows plotted development entrance in Hoskote",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-meadows-2.png",
+            alt: "Star Meadows landscaped plots in Hoskote",
+          },
+          {
+            src: "/starinfradeveloper/completed/star-meadows-3.png",
+            alt: "Star Meadows internal avenue in Hoskote",
+          },
+        ],
+      },
+      {
+        status: "ongoing",
+        title: "Arkha Sanctuary",
+        description:
+          "Arkha Sanctuary is a BBMP-approved 2 and 3 BHK residential development at BHCS Layout, Banashankari VI Stage, Bengaluru. The project highlights vastu-compliant homes with no common walls, a planned typical floor layout, and amenities including swimming pools, a gym, landscaped gardens, a jogging track and 24-hour security.",
+        images: [
+          {
+            src: "/starinfradeveloper/1.webp",
+            alt: "Arkha Sanctuary apartment exterior",
+          },
+          {
+            src: "/starinfradeveloper/2.webp",
+            alt: "Arkha Sanctuary typical floor plan",
+          },
+          {
+            src: "/starinfradeveloper/3.webp",
+            alt: "Arkha Sanctuary amenities and apartment layouts",
+          },
+        ],
+      },
+      {
+        status: "upcoming",
+        title: "Star Nirman Infra",
+        subtitle: "Modern 2BHK homes designed for comfortable family living.",
+        description:
+          "An upcoming G+5 residential community in Malur, beside STTR Road. Set across about one acre, it offers spacious, well-ventilated 2BHK homes designed for comfortable, secure family living.",
+        images: [
+          {
+            src: "/starinfradeveloper/upcomig1-1.webp",
+            alt: "Star Nirman Infra upcoming apartment development in Malur",
+          },
+          {
+            src: "/starinfradeveloper/upcoming1-2.webp",
+            alt: "Star Nirman Infra upcoming residential project exterior",
+          },
+          {
+            src: "/starinfradeveloper/upcoming1-3.webp",
+            alt: "Star Nirman Infra Malur 2BHK apartment project",
+          },
+        ],
+        details: [
+          {
+            title: "Project Highlights",
+            items: [
+              "Location: Malur – Right next to STTR Road",
+              "Project Type: Residential Apartment Development",
+              "Configuration: 100% 2BHK Apartments",
+              "Building: Ground + 5 Floors",
+              "Project Area: Approx. 1 Acre",
+              "Expected Handover: December 2027",
+            ],
+          },
+          {
+            title: "Planned Amenities",
+            description:
+              "Residents can look forward to a thoughtfully developed community with amenities designed for recreation, wellness, convenience and family living, including:",
+            items: [
+              "Landscaped entrance and beautifully designed green spaces",
+              "Children’s play area",
+              "Senior citizens’ seating and relaxation zone",
+              "Walking and jogging pathway",
+              "Multipurpose recreational area",
+              "Indoor games / activity area",
+              "Fitness / gymnasium space",
+              "Community gathering and multipurpose hall",
+              "Landscaped garden and leisure seating",
+              "Open lawn and family recreation spaces",
+              "Dedicated two-wheeler and car parking",
+              "Visitor parking",
+              "Security cabin and controlled entrance",
+              "CCTV surveillance in common areas",
+              "Lift access to all residential floors",
+              "Power backup for essential common areas",
+              "Rainwater harvesting",
+              "Sewage treatment and responsible water management",
+              "Waste management provisions",
+              "Borewell / water supply provisions",
+              "Fire safety systems as per applicable norms",
+              "Well-lit common areas and internal pathways",
+              "Modern entrance lobby",
+              "Dedicated utility and service areas",
+              "Vastu-conscious apartment planning wherever practically possible",
+            ],
+          },
+          {
+            title: "A Home Built Around Your Family",
+            description:
+              "More than just an apartment, this upcoming development is envisioned as a peaceful residential community where families can live comfortably, grow together and build lasting memories.\n\nWith excellent access through STTR Road, developing infrastructure around Malur and thoughtfully planned 2BHK residences, the project aims to offer an ideal combination of connectivity, comfort and long-term value.",
+            items: ["Possession – December 2027"],
+          },
+        ],
+        footer: [
+          "Your new beginning in Malur is taking shape.",
+          "STAR NIRMAN INFRA",
+          "Building Homes. Creating Happy Families.",
+        ],
+      },
+      {
+        status: "upcoming",
+        title: "Built Lux Con",
+        subtitle: "Exquisite 3BHK & 4BHK apartments designed for elevated living.",
+        description:
+          "An upcoming G+14 ultra-luxury address in Happy Valley Layout, Uttarahalli. Spacious 3BHK and 4BHK homes pair refined design, premium finishes, natural light and private, elevated living.",
+        images: [
+          {
+            src: "/starinfradeveloper/upcoming2-1.webp",
+            alt: "Built Lux Con proposed high-rise apartment entrance in Uttarahalli",
+          },
+          {
+            src: "/starinfradeveloper/upcoming2-2.webp",
+            alt: "Built Lux Con proposed G+14 residential tower",
+          },
+          {
+            src: "/starinfradeveloper/upcoming2-3.webp",
+            alt: "Built Lux Con proposed ultra-luxury apartment exterior",
+          },
+        ],
+        details: [
+          {
+            title: "Project Highlights",
+            items: [
+              "Project Name: Built Lux Con",
+              "Location: Happy Valley Layout, Uttarahalli",
+              "Project Type: Ultra-Luxury Residential Apartment Development",
+              "Configurations: Spacious 3BHK & 4BHK Apartments",
+              "Building: Ground + 14 Floors",
+              "Lifestyle: Premium urban living with world-class amenities",
+            ],
+          },
+          {
+            title: "World-Class Amenities",
+            description:
+              "Residents can look forward to an exceptional range of amenities designed for wellness, recreation, relaxation, convenience and community living, including:",
+            items: [
+              "Grand entrance lobby with premium finishes",
+              "Landscaped gardens and beautifully designed green spaces",
+              "Swimming pool with dedicated leisure deck",
+              "Fully equipped fitness centre and modern gymnasium",
+              "Indoor games and recreation zone",
+              "Children’s play area",
+              "Senior citizens’ relaxation and seating area",
+              "Walking and jogging tracks",
+              "Multipurpose hall for celebrations and gatherings",
+              "Clubhouse with premium lifestyle facilities",
+              "Outdoor family recreation spaces",
+              "Landscaped terrace and leisure zones",
+              "Dedicated two-wheeler and car parking",
+              "Visitor parking facilities",
+              "High-speed lift access to all floors",
+              "24/7 security and controlled entrance",
+              "CCTV surveillance in common areas",
+              "Power backup for essential services and common areas",
+              "Fire safety systems as per applicable norms",
+              "Rainwater harvesting and sustainable water management",
+              "Sewage treatment and waste management provisions",
+              "Well-lit internal pathways and common areas",
+              "Dedicated utility and service areas",
+              "Vastu-conscious apartment planning wherever practically possible",
+            ],
+          },
+          {
+            title: "A New Standard of Luxury Living",
+            description:
+              "More than just a residence, Built Lux Con is envisioned as an exclusive lifestyle destination where luxury, comfort, privacy and convenience come together.\n\nLocated in Happy Valley Layout, Uttarahalli, the project offers residents the advantage of a well-connected neighbourhood along with the tranquillity of a thoughtfully planned residential community. With premium 3BHK and 4BHK homes, a striking G+14 structure and world-class amenities, Built Lux Con is designed for families who aspire to live life at its finest.",
+          },
+        ],
+        footer: [
+          "Your Address of Distinction",
+          "BUILT LUX CON",
+          "Elevating Everyday Living to Extraordinary Heights.",
+        ],
+      },
+    ],
+    projectCounts: {
+      finished: 14,
+      ongoing: 3,
+      upcoming: 5,
+    },
+    milestone: {
+      value: "2,300+",
+      label: "Homes successfully delivered",
+      title: "Building Homes. Creating Happy Families.",
+      body: [
+        "We are proud to have successfully delivered more than 2,300 flats, providing families with thoughtfully designed, comfortable, and secure homes where they can live, grow, and create beautiful memories together.",
+        "Every home we deliver reflects our commitment to quality construction, peaceful living, modern comfort, and long-term value.",
+      ],
+      closing: "2,300+ Homes Delivered | Thousands of Happy Residents | One Trusted Commitment",
+    },
   },
   {
     slug: "mac-reality",

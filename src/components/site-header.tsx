@@ -24,8 +24,26 @@ const mobileNavLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+const navLogos: Record<string, string> = {
+  "star-gardens": "/company-logo/star-gardens-logo.png",
+  "starline-solutions": "/company-logo/starline-solutions-logo.png",
+  "star-production-house": "/company-logo/star-production-house-logo.png",
+  "star-tech-india": "/company-logo/star-tech-india-logo.png",
+  "star-spaces": "/company-logo/star-spaces-logo.png",
+  "star-growth-hub": "/company-logo/star-growth-hub-logo.png",
+  "star-infra-developers": "/company-logo/star-infra-developers-logo.png",
+  "mac-reality": "/company-logo/mac-reality.png",
+  "star-capital-venture": "/company-logo/star-venture-capital-logo.png",
+  "starline-import-export": "/company-logo/starline-import-export-logo.png",
+};
+
 export function SiteHeader() {
   const pathname = usePathname();
+  
+  // Determine logo based on the current page
+  const currentCompany = companies.find((c) => pathname === `/companies/${c.slug}`);
+  const logoSrc = currentCompany ? navLogos[currentCompany.slug] : "/company-logo/star-groups-logo.png";
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -148,8 +166,8 @@ export function SiteHeader() {
               className="relative block aspect-[2054/573] w-[7rem] origin-left overflow-hidden sm:w-[8.4rem]"
             >
               <Image
-                src="/logo.png"
-                alt=""
+                src={logoSrc}
+                alt={currentCompany ? `${currentCompany.name} logo` : "Star Groups logo"}
                 fill
                 sizes="(max-width: 640px) 140px, 168px"
                 priority

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function EnquiryPage() {
   return (
-    <section className="sg-grain relative overflow-hidden bg-sg-paper pb-24 pt-36 lg:pb-32 lg:pt-44">
+    <section className="sg-grain relative overflow-hidden bg-sg-paper pb-24 pt-24 lg:pb-32 lg:pt-28">
       {/* Background Decorative Gridlines */}
       <div
         aria-hidden="true"

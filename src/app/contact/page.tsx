@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="sg-grain relative overflow-hidden bg-sg-paper pb-20 pt-36 lg:pb-28 lg:pt-44">
+      <section className="sg-grain relative overflow-hidden bg-sg-paper pb-20 pt-24 lg:pb-28 lg:pt-28">
         {/* Background Decorative Gridlines */}
         <div
           aria-hidden="true"

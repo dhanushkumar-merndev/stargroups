@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function CompaniesPage() {
   return (
     <>
-      <section className="sg-grain relative overflow-hidden bg-white pb-16 pt-36 lg:pb-20 lg:pt-44">
+      <section className="sg-grain relative overflow-hidden bg-white pb-16 pt-24 lg:pb-20 lg:pt-28">
         <div
           aria-hidden="true"
           className="sg-gridlines pointer-events-none absolute inset-0"

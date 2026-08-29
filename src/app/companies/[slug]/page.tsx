@@ -64,7 +64,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
   return (
     <>
       {/* ---------- Hero ---------- */}
-      <section className="sg-grain relative overflow-hidden bg-white pb-20 pt-36 lg:pb-28 lg:pt-44">
+      <section className="sg-grain relative overflow-hidden bg-white pb-20 pt-24 lg:pb-28 lg:pt-28">
         <div
           aria-hidden="true"
           className="sg-gridlines pointer-events-none absolute inset-0"

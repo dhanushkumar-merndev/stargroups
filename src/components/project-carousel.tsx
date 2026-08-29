@@ -27,7 +27,7 @@ export function ProjectCarousel({ images }: { images: ProjectImage[] }) {
       <div
         ref={scrollerRef}
         aria-label="Project image carousel"
-        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:-mx-10 lg:px-10"
+        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:-mx-10 lg:px-10 lg:scroll-pl-10"
       >
         {images.map((image, i) => (
           <a

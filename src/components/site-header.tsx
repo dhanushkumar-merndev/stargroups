@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -32,6 +33,39 @@ export function SiteHeader() {
   const closeAll = () => {
     setMenuOpen(false);
     setMobileOpen(false);
+  };
+
+  // While momentum scrolling is still running the browser swallows the first
+  // tap (it only stops the fling), so the burger used to need two presses.
+  // Derive the tap from pointer events instead of relying on `click`.
+  const tapStart = useRef<{ x: number; y: number; id: number } | null>(null);
+  const ignoreNextClick = useRef(false);
+
+  const onTogglePointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (event.pointerType === "mouse") return;
+    tapStart.current = { x: event.clientX, y: event.clientY, id: event.pointerId };
+  };
+
+  const onTogglePointerUp = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    const start = tapStart.current;
+    tapStart.current = null;
+    if (!start || start.id !== event.pointerId) return;
+    // Treat it as a drag (the user was scrolling), not a tap.
+    if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > 10) return;
+
+    ignoreNextClick.current = true;
+    window.setTimeout(() => {
+      ignoreNextClick.current = false;
+    }, 500);
+    setMobileOpen((v) => !v);
+  };
+
+  const onToggleClick = () => {
+    if (ignoreNextClick.current) {
+      ignoreNextClick.current = false;
+      return;
+    }
+    setMobileOpen((v) => !v);
   };
 
   // Ensure sidebar is closed whenever the route changes
@@ -100,7 +134,7 @@ export function SiteHeader() {
               : "border-b border-transparent bg-transparent",
         )}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-2.5 sm:px-6 sm:py-4 lg:px-10">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-2.5 sm:py-4 lg:px-10">
           {/* Brand */}
           <Link
             href="/"
@@ -109,17 +143,17 @@ export function SiteHeader() {
             className="block"
           >
             <motion.span
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="relative block h-10 w-40 overflow-hidden sm:h-11 sm:w-48"
+              className="relative block aspect-[2054/573] w-[7rem] origin-left overflow-hidden sm:w-[8.4rem]"
             >
               <Image
                 src="/logo.png"
                 alt=""
                 fill
-                sizes="(max-width: 640px) 160px, 192px"
+                sizes="(max-width: 640px) 140px, 168px"
                 priority
-                className="scale-[1] object-cover object-center mix-blend-multiply"
+                className="object-contain object-left mix-blend-multiply"
               />
             </motion.span>
           </Link>
@@ -213,7 +247,10 @@ export function SiteHeader() {
 
           {/* Mobile toggle */}
           <button
-            onClick={() => setMobileOpen((v) => !v)}
+            onPointerDown={onTogglePointerDown}
+            onPointerUp={onTogglePointerUp}
+            onPointerCancel={() => (tapStart.current = null)}
+            onClick={onToggleClick}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             className="text-sg-dark-ink lg:hidden"
@@ -225,7 +262,10 @@ export function SiteHeader() {
 
       {/* Mobile sheet */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 overflow-y-auto bg-white px-6 pb-16 pt-24 lg:hidden">
+        <div
+          data-lenis-prevent=""
+          className="fixed inset-0 z-40 overscroll-contain overflow-y-auto bg-white px-6 pb-16 pt-24 lg:hidden"
+        >
           <nav className="flex flex-col gap-1">
             {mobileNavLinks.map((link) => (
               <div key={link.href}>

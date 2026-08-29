@@ -105,13 +105,13 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
               {company.intro}
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-3">
+            <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               {company.website ? (
                 <a
                   href={company.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-sg-red px-7 text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.6)]"
+                  className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-sg-red px-7 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.6)] sm:w-auto"
                 >
                   Visit {company.website.replace("https://", "")}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -119,7 +119,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
               ) : (
                 <Link
                   href="/enquiry"
-                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-sg-red px-7 text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.6)]"
+                  className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-sg-red px-7 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.6)] sm:w-auto"
                 >
                   Enquire about {company.name}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -127,7 +127,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
               )}
               <Link
                 href="/enquiry"
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-sg-dark-ink px-7 text-sm font-semibold text-sg-dark-ink transition-all duration-300 hover:bg-sg-dark-ink hover:text-white"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-sg-dark-ink px-7 py-3 text-center text-sm font-semibold text-sg-dark-ink transition-all duration-300 hover:bg-sg-dark-ink hover:text-white sm:w-auto"
               >
                 Talk to the group
               </Link>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Check, Info, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useDragControls } from "motion/react";
 import type { Project } from "@/lib/companies";
 
 type ProjectDetail = NonNullable<Project["details"]>[number];
@@ -45,6 +45,17 @@ export function ProjectInfoDialog({
   footer?: string[];
 }) {
   const [open, setOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const dragControls = useDragControls();
+
+  // The sheet slides up on phones and fades in as a centred modal from md up.
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 768px)");
+    const sync = () => setIsDesktop(query.matches);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -64,7 +75,7 @@ export function ProjectInfoDialog({
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="group inline-flex h-10 shrink-0 items-center gap-2.5 rounded-full border border-sg-line-light bg-white/95 px-3.5 py-1.5 md:px-4 text-sm font-semibold text-sg-dark-ink shadow-xs backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sg-red/40 hover:bg-white hover:text-sg-red hover:shadow-[0_8px_20px_-4px_rgba(224,20,44,0.16)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sg-red focus-visible:ring-offset-2"
+        className="group inline-flex h-10 w-full shrink-0 items-center justify-center gap-2.5 rounded-full md:w-auto border border-sg-line-light bg-white/95 px-3.5 py-1.5 md:px-4 text-sm font-semibold text-sg-dark-ink shadow-xs backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sg-red/40 hover:bg-white hover:text-sg-red hover:shadow-[0_8px_20px_-4px_rgba(224,20,44,0.16)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sg-red focus-visible:ring-offset-2"
       >
         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-sg-red-tint text-sg-red transition-all duration-300 group-hover:bg-sg-red group-hover:text-white group-hover:scale-105 group-hover:rotate-6">
           <Info className="h-3 w-3" strokeWidth={2.5} />
@@ -86,7 +97,7 @@ export function ProjectInfoDialog({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-sg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 bg-sg-black/50 md:backdrop-blur-sm"
               aria-hidden="true"
             />
 
@@ -95,15 +106,33 @@ export function ProjectInfoDialog({
               aria-modal="true"
               aria-labelledby="project-info-title"
               data-lenis-prevent=""
-              initial={{ opacity: 0, y: 24, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              drag={isDesktop ? false : "y"}
+              dragControls={dragControls}
+              dragListener={false}
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={{ top: 0, bottom: 0.55 }}
+              dragMomentum={false}
+              onDragEnd={(_, info) => {
+                if (info.offset.y > 120 || info.velocity.y > 700) setOpen(false);
+              }}
+              initial={isDesktop ? { opacity: 0, scale: 0.98 } : { y: "100%" }}
+              animate={isDesktop ? { opacity: 1, scale: 1 } : { y: 0 }}
+              exit={isDesktop ? { opacity: 0, scale: 0.98 } : { y: "100%" }}
+              transition={{ type: "tween", duration: 0.34, ease: [0.32, 0.72, 0, 1] }}
+              style={{ willChange: "transform" }}
               className="relative z-10 flex max-h-[88dvh] w-full flex-col rounded-t-3xl border border-sg-line-light/80 bg-white shadow-2xl md:max-h-[80dvh] md:w-[min(92vw,72rem)] md:rounded-3xl"
             >
-              <div className="flex items-center justify-between border-b border-sg-line-light px-5 py-4 md:px-7">
-                <div>
-                  <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-sg-line-light md:hidden" />
+              {/* Grab bar — drag it down to dismiss (phones only) */}
+              <div
+                onPointerDown={(event) => dragControls.start(event)}
+                aria-hidden="true"
+                className="flex shrink-0 cursor-grab touch-none justify-center pb-1 pt-3 active:cursor-grabbing md:hidden"
+              >
+                <span className="h-1 w-10 rounded-full bg-sg-line-light" />
+              </div>
+
+              <div className="flex items-start justify-between gap-4 border-b border-sg-line-light px-5 pb-4 pt-2 md:px-7 md:py-4">
+                <div className="min-w-0 flex-1 text-center md:text-left">
                   <p className="sg-eyebrow text-sg-red">Project information</p>
                   <h2
                     id="project-info-title"
@@ -116,7 +145,7 @@ export function ProjectInfoDialog({
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label="Close project information"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-sg-line-light bg-sg-paper text-sg-dark-ink transition-all duration-300 hover:rotate-90 hover:border-sg-red/40 hover:bg-sg-red-tint hover:text-sg-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sg-red"
+                  className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sg-line-light bg-sg-paper text-sg-dark-ink transition-all duration-300 hover:rotate-90 hover:border-sg-red/40 hover:bg-sg-red-tint hover:text-sg-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sg-red md:flex"
                 >
                   <X className="h-4 w-4" />
                 </button>

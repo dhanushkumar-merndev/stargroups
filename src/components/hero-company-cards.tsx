@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import { motion, useAnimation, useReducedMotion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { companies } from "@/lib/companies";
 import { CompanyLogo } from "./company-logo";
 
@@ -169,14 +169,16 @@ function HeroCompanyCard({
 }
 
 export function HeroCompanyCardsMobile() {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <div className="relative z-20 mt-12 grid w-full max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2 xl:hidden">
-      {cardDetails.map((detail) => {
+      {cardDetails.map((detail, index) => {
         const company = companies.find((item) => item.slug === detail.slug);
         if (!company) return null;
 
         return (
-          <div key={company.slug}>
+          <div key={company.slug} className={index > 2 && !showAll ? "hidden sm:block" : undefined}>
             <Link href={`/companies/${company.slug}`} className="group block text-left">
               <div className="rounded-2xl border border-sg-line-light bg-white/95 p-3 shadow-[0_10px_24px_-10px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-sg-red/60 hover:shadow-[0_15px_32px_-12px_rgba(224,20,44,0.3)]">
                 <div className="mb-2 flex items-center justify-between gap-2">
@@ -205,6 +207,18 @@ export function HeroCompanyCardsMobile() {
           </div>
         );
       })}
+
+      <button
+        type="button"
+        onClick={() => setShowAll((visible) => !visible)}
+        aria-expanded={showAll}
+        className="flex min-h-12 w-full items-center justify-center gap-2 bg-transparent px-5 py-3 text-sm font-semibold text-sg-dark-ink sm:hidden"
+      >
+        {showAll ? "Show less" : "See more"}
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${showAll ? "rotate-180" : ""}`}
+        />
+      </button>
     </div>
   );
 }

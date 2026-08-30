@@ -34,15 +34,59 @@ const navLogos: Record<string, string> = {
   "star-infra-developers": "/company-logo/star-infra-developers-logo.png",
   "mac-reality": "/company-logo/mac-reality.png",
   "star-capital-venture": "/company-logo/star-venture-capital-logo.png",
-  "starline-import-export": "/company-logo/starline-import-export-logo.png",
+  "starline-import-export": "/company-logo/starline-import-export-logo-v2.png",
+};
+
+const navLogoDisplay: Record<string, { className: string; sizes: string }> = {
+  "star-gardens": {
+    className: "w-[10.3rem] sm:w-[11.1rem]",
+    sizes: "(max-width: 640px) 140px, 168px",
+  },
+  "starline-solutions": {
+    className: "w-[9.7rem] sm:w-[10.9rem]",
+    sizes: "(max-width: 640px) 155px, 174px",
+  },
+  "star-production-house": {
+    className: "w-[11.8rem] sm:w-[13.3rem]",
+    sizes: "(max-width: 640px) 189px, 213px",
+  },
+  "star-tech-india": {
+    className: "w-[8.3rem] sm:w-[9.3rem]",
+    sizes: "(max-width: 640px) 133px, 149px",
+  },
+  "star-spaces": {
+    className: "w-[7.6rem] sm:w-[8.5rem]",
+    sizes: "(max-width: 640px) 122px, 136px",
+  },
+  "star-growth-hub": {
+    className: "w-[9.3rem] sm:w-[10.5rem]",
+    sizes: "(max-width: 640px) 149px, 168px",
+  },
+  "star-infra-developers": {
+    className: "w-[10.8rem] sm:w-[12.2rem]",
+    sizes: "(max-width: 640px) 173px, 195px",
+  },
+  "mac-reality": {
+    className: "w-[7rem] sm:w-[7.9rem]",
+    sizes: "(max-width: 640px) 112px, 126px",
+  },
+  "star-capital-venture": {
+    className: "w-[10.8rem] sm:w-[12.1rem]",
+    sizes: "(max-width: 640px) 173px, 194px",
+  },
+  "starline-import-export": {
+    className: "w-[13rem] sm:w-[15rem]",
+    sizes: "(max-width: 640px) 208px, 240px",
+  },
 };
 
 export function SiteHeader() {
   const pathname = usePathname();
-  
+
   // Determine logo based on the current page
   const currentCompany = companies.find((c) => pathname === `/companies/${c.slug}`);
   const logoSrc = currentCompany ? navLogos[currentCompany.slug] : "/company-logo/star-groups-logo.png";
+  const logoDisplay = currentCompany ? navLogoDisplay[currentCompany.slug] : undefined;
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -163,13 +207,16 @@ export function SiteHeader() {
             <motion.span
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="relative block aspect-[2054/573] w-[7rem] origin-left overflow-hidden sm:w-[8.4rem]"
+              className={cn(
+                "relative block h-8 origin-left overflow-hidden sm:h-9",
+                logoDisplay?.className ?? "w-[7.4rem] sm:w-[8.3rem]",
+              )}
             >
               <Image
                 src={logoSrc}
                 alt={currentCompany ? `${currentCompany.name} logo` : "Star Groups logo"}
                 fill
-                sizes="(max-width: 640px) 140px, 168px"
+                sizes={logoDisplay?.sizes ?? "(max-width: 640px) 118px, 133px"}
                 priority
                 className="object-contain object-left mix-blend-multiply"
               />

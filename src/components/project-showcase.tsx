@@ -30,7 +30,7 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-export function ProjectShowcase({ projects }: { projects: Project[] }) {
+export function ProjectShowcase({ projects, intro }: { projects: Project[]; intro?: string }) {
   const finishedProjects = projects.filter((project) => project.status === "finished");
   const ongoingProjects = projects.filter((project) => project.status === "ongoing");
   const upcomingProjects = projects.filter((project) => project.status === "upcoming");
@@ -41,8 +41,8 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
         <section>
           <p className="sg-eyebrow mb-5 text-sg-red">Our completed projects.</p>
           <p className="max-w-[66ch] text-base leading-relaxed text-sg-dark-muted">
-            Thoughtfully planned communities and farmland developments in Madikeri and Hoskote,
-            created around quality infrastructure, natural surroundings and lasting value.
+            {intro ??
+              "Selected completed work, presented through the places, details and outcomes that define each project."}
           </p>
           <div className="mt-8 space-y-10">
             {finishedProjects.map((project) => (

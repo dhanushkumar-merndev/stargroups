@@ -37,14 +37,8 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
   const index = companies.findIndex((c) => c.slug === slug);
   const next = companies[(index + 1) % companies.length];
   const prev = companies[(index - 1 + companies.length) % companies.length];
-  const projectCounts = company.projects
-    ? (company.projectCounts ?? {
-        finished: company.projects.filter((project) => project.status === "finished").length,
-        ongoing: company.projects.filter((project) => project.status === "ongoing").length,
-        upcoming: company.projects.filter((project) => project.status === "upcoming").length,
-      })
-    : null;
-  const stats = company.projects
+  const projectCounts = company.projectCounts ?? null;
+  const stats = projectCounts
     ? [
         {
           value: String(projectCounts?.finished ?? 0),
@@ -141,7 +135,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
         <section className="relative bg-sg-paper py-20 lg:py-24">
           <LeafPattern />
           <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-            <ProjectShowcase projects={company.projects} />
+            <ProjectShowcase projects={company.projects} intro={company.projectIntro} />
           </div>
         </section>
       )}
@@ -289,34 +283,90 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
       </section>
 
       {/* ---------- Prev / next ---------- */}
-      <section className="relative border-t border-sg-line-light bg-sg-paper py-8 sm:py-16">
+      <section className="relative border-t border-sg-line-light bg-sg-paper py-4 sm:py-16">
         <LeafPattern />
-        <div className="relative mx-auto grid grid-cols-2 max-w-[1400px] gap-2.5 sm:gap-4 px-3 sm:px-6 lg:px-10">
+        <div className="relative mx-auto grid max-w-[1400px] grid-cols-2 gap-1.5 px-2 sm:gap-4 sm:px-6 lg:px-10">
           <Link
             href={`/companies/${prev.slug}`}
-            className="group rounded-xl sm:rounded-2xl border border-sg-line-light bg-white p-3.5 sm:p-7 transition-all duration-400 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
+            className="group relative block rounded-lg border border-sg-line-light bg-white p-2 transition-all duration-400 hover:-translate-y-0.5 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)] sm:flex sm:items-center sm:gap-5 sm:rounded-2xl sm:p-6"
           >
-            <span className="flex items-center gap-1.5 sm:gap-2 text-[0.62rem] sm:text-xs uppercase tracking-wider sm:tracking-widest text-sg-dark-muted">
-              <ArrowLeft className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0 transition-transform group-hover:-translate-x-1" />
-              Previous
-            </span>
-            <span className="mt-1.5 sm:mt-3 block font-display text-[0.82rem] sm:text-lg md:text-xl font-semibold leading-snug text-sg-dark-ink transition-colors group-hover:text-sg-red truncate">
-              {prev.name}
-            </span>
-            <span className="mt-0.5 sm:mt-1 block text-[0.65rem] sm:text-sm text-sg-dark-muted truncate">{prev.sector}</span>
+            <div className="sm:hidden">
+              <span className="flex items-center gap-1 font-mono text-[0.48rem] uppercase tracking-wide text-sg-dark-muted">
+                <ArrowLeft className="h-2 w-2 shrink-0" />
+                Previous
+              </span>
+              <div className="mt-1.5 flex items-center gap-1.5">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-sg-line-light/70 bg-sg-paper p-1">
+                  <CompanyLogo company={prev} className="h-full w-full object-contain" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="block font-display text-[0.62rem] font-semibold leading-tight text-sg-dark-ink">
+                    {prev.name}
+                  </span>
+                  <span className="mt-px block truncate text-[0.46rem] text-sg-dark-muted">
+                    {prev.sector}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="hidden sm:contents">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-sg-line-light/70 bg-sg-paper p-2 transition-all duration-300 group-hover:scale-105 group-hover:border-sg-red/30">
+                <CompanyLogo company={prev} className="h-full w-full object-contain" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="flex items-center gap-2 text-xs uppercase tracking-widest text-sg-dark-muted">
+                  <ArrowLeft className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:-translate-x-1" />
+                  Previous
+                </span>
+                <span className="mt-1 block truncate font-display text-lg font-semibold leading-snug text-sg-dark-ink transition-colors group-hover:text-sg-red md:text-xl">
+                  {prev.name}
+                </span>
+                <span className="mt-0.5 block truncate text-xs text-sg-dark-muted md:text-sm">
+                  {prev.sector}
+                </span>
+              </div>
+            </div>
           </Link>
           <Link
             href={`/companies/${next.slug}`}
-            className="group rounded-xl sm:rounded-2xl border border-sg-line-light bg-white p-3.5 sm:p-7 text-right transition-all duration-400 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)]"
+            className="group relative block rounded-lg border border-sg-line-light bg-white p-2 transition-all duration-400 hover:-translate-y-0.5 hover:border-sg-red hover:shadow-[0_20px_40px_-28px_rgba(224,20,44,0.6)] sm:flex sm:items-center sm:justify-between sm:gap-5 sm:rounded-2xl sm:p-6"
           >
-            <span className="flex items-center justify-end gap-1.5 sm:gap-2 text-[0.62rem] sm:text-xs uppercase tracking-wider sm:tracking-widest text-sg-dark-muted">
-              Next
-              <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0 transition-transform group-hover:translate-x-1" />
-            </span>
-            <span className="mt-1.5 sm:mt-3 block font-display text-[0.82rem] sm:text-lg md:text-xl font-semibold leading-snug text-sg-dark-ink transition-colors group-hover:text-sg-red truncate">
-              {next.name}
-            </span>
-            <span className="mt-0.5 sm:mt-1 block text-[0.65rem] sm:text-sm text-sg-dark-muted truncate">{next.sector}</span>
+            <div className="sm:hidden">
+              <span className="flex items-center justify-end gap-1 font-mono text-[0.48rem] uppercase tracking-wide text-sg-dark-muted">
+                Next
+                <ArrowRight className="h-2 w-2 shrink-0" />
+              </span>
+              <div className="mt-1.5 flex items-center justify-end gap-1.5">
+                <div className="min-w-0 flex-1 text-right">
+                  <span className="block font-display text-[0.62rem] font-semibold leading-tight text-sg-dark-ink">
+                    {next.name}
+                  </span>
+                  <span className="mt-px block truncate text-[0.46rem] text-sg-dark-muted">
+                    {next.sector}
+                  </span>
+                </div>
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-sg-line-light/70 bg-sg-paper p-1">
+                  <CompanyLogo company={next} className="h-full w-full object-contain" />
+                </div>
+              </div>
+            </div>
+            <div className="hidden sm:contents">
+              <div className="min-w-0 flex-1 text-right">
+                <span className="flex items-center justify-end gap-2 text-xs uppercase tracking-widest text-sg-dark-muted">
+                  Next
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-1" />
+                </span>
+                <span className="mt-1 block truncate font-display text-lg font-semibold leading-snug text-sg-dark-ink transition-colors group-hover:text-sg-red md:text-xl">
+                  {next.name}
+                </span>
+                <span className="mt-0.5 block truncate text-xs text-sg-dark-muted md:text-sm">
+                  {next.sector}
+                </span>
+              </div>
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-sg-line-light/70 bg-sg-paper p-2 transition-all duration-300 group-hover:scale-105 group-hover:border-sg-red/30">
+                <CompanyLogo company={next} className="h-full w-full object-contain" />
+              </div>
+            </div>
           </Link>
         </div>
       </section>

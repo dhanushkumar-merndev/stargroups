@@ -14,7 +14,6 @@ import {
   MessageSquare,
   Phone,
   ShieldCheck,
-  Sparkles,
   User,
   AlertCircle,
 } from "lucide-react";
@@ -30,7 +29,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group relative inline-flex w-full sm:w-auto min-h-[52px] items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-[#e81932] via-[#d61229] to-[#b80b1f] px-8 py-3.5 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_12px_28px_-6px_rgba(224,20,44,0.45),0_2px_4px_rgba(0,0,0,0.1)] transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_18px_36px_-6px_rgba(224,20,44,0.55)] active:scale-[0.98] active:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+      className="group relative inline-flex min-h-[46px] w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-gradient-to-b from-[#e81932] via-[#d61229] to-[#b80b1f] px-6 py-3 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_12px_28px_-6px_rgba(224,20,44,0.45),0_2px_4px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_18px_36px_-6px_rgba(224,20,44,0.55)] active:scale-[0.98] active:brightness-95 disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[52px] sm:w-auto sm:gap-3 sm:rounded-2xl sm:px-8 sm:py-3.5"
     >
       {pending ? (
         <>
@@ -68,19 +67,6 @@ export function EnquiryForm() {
     interest: "",
     message: "",
   });
-
-  // Sync state if returned from server
-  useEffect(() => {
-    if (state.fields) {
-      setFormData((prev) => ({
-        name: state.fields?.name ?? prev.name,
-        email: state.fields?.email ?? prev.email,
-        phone: state.fields?.phone ?? prev.phone,
-        interest: state.fields?.interest ?? prev.interest,
-        message: state.fields?.message ?? prev.message,
-      }));
-    }
-  }, [state.fields]);
 
   // Auto-open WhatsApp with pre-filled enquiry parameters when submission is successful
   useEffect(() => {
@@ -153,11 +139,11 @@ export function EnquiryForm() {
   return (
     <form
       action={formAction}
-      className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-5 sm:p-8 md:p-10 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.07),0_10px_30px_-10px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl"
+      className="relative overflow-hidden rounded-[24px] border border-white/80 bg-gradient-to-b from-white/90 via-white/80 to-white/65 p-4 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.07),0_10px_30px_-10px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-black/[0.04] backdrop-blur-2xl sm:rounded-[36px] sm:p-8 md:p-10"
     >
       {/* Header bar */}
-      <div className="mb-6 sm:mb-8 border-b border-black/[0.06] pb-5 sm:pb-6">
-        <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-sg-dark-ink">
+      <div className="mb-4 border-b border-black/[0.06] pb-4 sm:mb-8 sm:pb-6">
+        <h3 className="font-display text-lg font-bold leading-tight tracking-tight text-sg-dark-ink sm:text-2xl">
           Project &amp; Partnership Enquiry
         </h3>
         <p className="mt-1 text-xs text-sg-dark-muted">
@@ -171,12 +157,12 @@ export function EnquiryForm() {
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="grid gap-5 sm:gap-6 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
         {/* Name */}
         <div className="sm:col-span-1">
           <label
             htmlFor="name"
-            className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink"
+            className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink sm:mb-2"
           >
             <span>
               Your Name <span className="text-sg-red font-bold">*</span>
@@ -184,14 +170,14 @@ export function EnquiryForm() {
           </label>
           <div
             className={cn(
-              "group relative flex items-center rounded-2xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:bg-white/90 hover:border-black/[0.14] focus-within:bg-white focus-within:border-sg-red focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)]",
+              "group relative flex items-center rounded-xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:border-black/[0.14] hover:bg-white/90 focus-within:border-sg-red focus-within:bg-white focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)] sm:rounded-2xl",
               state.errors?.name
                 ? "border-sg-red bg-sg-red-tint/30 ring-2 ring-sg-red/20"
                 : "border-black/[0.08]"
             )}
           >
-            <div className="pointer-events-none absolute left-3 flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red">
-              <User className="h-4 w-4" />
+            <div className="pointer-events-none absolute left-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red sm:left-3 sm:h-8 sm:w-8 sm:rounded-xl">
+              <User className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
             <input
               id="name"
@@ -203,7 +189,7 @@ export function EnquiryForm() {
               autoComplete="name"
               placeholder="e.g. Rahul Sharma"
               aria-invalid={!!state.errors?.name}
-              className="w-full bg-transparent py-3.5 pl-12 pr-4 text-base sm:text-sm text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none min-h-[52px]"
+              className="min-h-[44px] w-full bg-transparent py-2.5 pl-11 pr-3 text-base text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none sm:min-h-[52px] sm:py-3.5 sm:pl-12 sm:pr-4 sm:text-sm"
             />
           </div>
           <FieldError>{state.errors?.name}</FieldError>
@@ -213,7 +199,7 @@ export function EnquiryForm() {
         <div className="sm:col-span-1">
           <label
             htmlFor="email"
-            className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink"
+            className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink sm:mb-2"
           >
             <span>
               Work Email <span className="text-sg-red font-bold">*</span>
@@ -221,14 +207,14 @@ export function EnquiryForm() {
           </label>
           <div
             className={cn(
-              "group relative flex items-center rounded-2xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:bg-white/90 hover:border-black/[0.14] focus-within:bg-white focus-within:border-sg-red focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)]",
+              "group relative flex items-center rounded-xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:border-black/[0.14] hover:bg-white/90 focus-within:border-sg-red focus-within:bg-white focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)] sm:rounded-2xl",
               state.errors?.email
                 ? "border-sg-red bg-sg-red-tint/30 ring-2 ring-sg-red/20"
                 : "border-black/[0.08]"
             )}
           >
-            <div className="pointer-events-none absolute left-3 flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red">
-              <Mail className="h-4 w-4" />
+            <div className="pointer-events-none absolute left-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red sm:left-3 sm:h-8 sm:w-8 sm:rounded-xl">
+              <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
             <input
               id="email"
@@ -240,7 +226,7 @@ export function EnquiryForm() {
               autoComplete="email"
               placeholder="you@company.com"
               aria-invalid={!!state.errors?.email}
-              className="w-full bg-transparent py-3.5 pl-12 pr-4 text-base sm:text-sm text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none min-h-[52px]"
+              className="min-h-[44px] w-full bg-transparent py-2.5 pl-11 pr-3 text-base text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none sm:min-h-[52px] sm:py-3.5 sm:pl-12 sm:pr-4 sm:text-sm"
             />
           </div>
           <FieldError>{state.errors?.email}</FieldError>
@@ -250,7 +236,7 @@ export function EnquiryForm() {
         <div className="sm:col-span-1">
           <label
             htmlFor="phone"
-            className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink"
+            className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink sm:mb-2"
           >
             <span>
               Phone{" "}
@@ -261,14 +247,14 @@ export function EnquiryForm() {
           </label>
           <div
             className={cn(
-              "group relative flex items-center rounded-2xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:bg-white/90 hover:border-black/[0.14] focus-within:bg-white focus-within:border-sg-red focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)]",
+              "group relative flex items-center rounded-xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:border-black/[0.14] hover:bg-white/90 focus-within:border-sg-red focus-within:bg-white focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)] sm:rounded-2xl",
               state.errors?.phone
                 ? "border-sg-red bg-sg-red-tint/30 ring-2 ring-sg-red/20"
                 : "border-black/[0.08]"
             )}
           >
-            <div className="pointer-events-none absolute left-3 flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red">
-              <Phone className="h-4 w-4" />
+            <div className="pointer-events-none absolute left-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red sm:left-3 sm:h-8 sm:w-8 sm:rounded-xl">
+              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
             <input
               id="phone"
@@ -279,7 +265,7 @@ export function EnquiryForm() {
               autoComplete="tel"
               placeholder="+91 98765 43210"
               aria-invalid={!!state.errors?.phone}
-              className="w-full bg-transparent py-3.5 pl-12 pr-4 text-base sm:text-sm text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none min-h-[52px]"
+              className="min-h-[44px] w-full bg-transparent py-2.5 pl-11 pr-3 text-base text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none sm:min-h-[52px] sm:py-3.5 sm:pl-12 sm:pr-4 sm:text-sm"
             />
           </div>
           <FieldError>{state.errors?.phone}</FieldError>
@@ -289,7 +275,7 @@ export function EnquiryForm() {
         <div className="sm:col-span-1">
           <label
             htmlFor="interest"
-            className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink"
+            className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink sm:mb-2"
           >
             <span>
               Select Company / Need <span className="text-sg-red font-bold">*</span>
@@ -297,14 +283,14 @@ export function EnquiryForm() {
           </label>
           <div
             className={cn(
-              "group relative flex items-center rounded-2xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:bg-white/90 hover:border-black/[0.14] focus-within:bg-white focus-within:border-sg-red focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)]",
+              "group relative flex items-center rounded-xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:border-black/[0.14] hover:bg-white/90 focus-within:border-sg-red focus-within:bg-white focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)] sm:rounded-2xl",
               state.errors?.interest
                 ? "border-sg-red bg-sg-red-tint/30 ring-2 ring-sg-red/20"
                 : "border-black/[0.08]"
             )}
           >
-            <div className="pointer-events-none absolute left-3 flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red">
-              <Building2 className="h-4 w-4" />
+            <div className="pointer-events-none absolute left-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red sm:left-3 sm:h-8 sm:w-8 sm:rounded-xl">
+              <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
             <select
               id="interest"
@@ -313,7 +299,7 @@ export function EnquiryForm() {
               value={formData.interest}
               onChange={handleChange}
               aria-invalid={!!state.errors?.interest}
-              className="w-full appearance-none bg-transparent py-3.5 pl-12 pr-10 text-base sm:text-sm text-sg-dark-ink outline-none min-h-[52px] cursor-pointer"
+              className="min-h-[44px] w-full cursor-pointer appearance-none bg-transparent py-2.5 pl-11 pr-10 text-base text-sg-dark-ink outline-none sm:min-h-[52px] sm:py-3.5 sm:pl-12 sm:text-sm"
             >
               <option value="" disabled>
                 Choose a Star Groups venture…
@@ -324,8 +310,8 @@ export function EnquiryForm() {
                 </option>
               ))}
             </select>
-            <div className="pointer-events-none absolute right-3.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.04] text-sg-dark-muted">
-              <ChevronDown className="h-4 w-4" />
+            <div className="pointer-events-none absolute right-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.04] text-sg-dark-muted sm:right-3.5">
+              <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
           </div>
           <FieldError>{state.errors?.interest}</FieldError>
@@ -335,7 +321,7 @@ export function EnquiryForm() {
         <div className="sm:col-span-2">
           <label
             htmlFor="message"
-            className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink"
+            className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-sg-dark-ink sm:mb-2"
           >
             <span>
               Project Details <span className="text-sg-red font-bold">*</span>
@@ -346,14 +332,14 @@ export function EnquiryForm() {
           </label>
           <div
             className={cn(
-              "group relative flex rounded-2xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:bg-white/90 hover:border-black/[0.14] focus-within:bg-white focus-within:border-sg-red focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)]",
+              "group relative flex rounded-xl border bg-white/70 backdrop-blur-xl shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(255,255,255,0.9)] transition-all duration-300 hover:border-black/[0.14] hover:bg-white/90 focus-within:border-sg-red focus-within:bg-white focus-within:ring-4 focus-within:ring-sg-red/12 focus-within:shadow-[0_8px_25px_-6px_rgba(224,20,44,0.18),inset_0_1px_1px_rgba(255,255,255,1)] sm:rounded-2xl",
               state.errors?.message
                 ? "border-sg-red bg-sg-red-tint/30 ring-2 ring-sg-red/20"
                 : "border-black/[0.08]"
             )}
           >
-            <div className="pointer-events-none absolute left-3 top-3.5 flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red">
-              <MessageSquare className="h-4 w-4" />
+            <div className="pointer-events-none absolute left-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/[0.03] text-sg-dark-muted/70 transition-colors group-focus-within:bg-sg-red-tint group-focus-within:text-sg-red sm:left-3 sm:top-3.5 sm:h-8 sm:w-8 sm:rounded-xl">
+              <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
             <textarea
               id="message"
@@ -364,7 +350,7 @@ export function EnquiryForm() {
               onChange={handleChange}
               placeholder="Tell us what you're building, key requirements, goals, or any specific questions..."
               aria-invalid={!!state.errors?.message}
-              className="w-full resize-y bg-transparent py-3.5 pl-12 pr-4 text-base sm:text-sm text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none min-h-[120px] sm:min-h-[130px]"
+              className="min-h-[96px] w-full resize-y bg-transparent py-2.5 pl-11 pr-3 text-base text-sg-dark-ink placeholder:text-sg-dark-muted/50 outline-none sm:min-h-[130px] sm:py-3.5 sm:pl-12 sm:pr-4 sm:text-sm"
             />
           </div>
           <FieldError>{state.errors?.message}</FieldError>
@@ -379,7 +365,7 @@ export function EnquiryForm() {
       )}
 
       {/* Footer / Submit area */}
-      <div className="mt-7 sm:mt-9 flex flex-col items-stretch sm:items-center justify-between gap-4 border-t border-black/[0.06] pt-6 sm:flex-row">
+      <div className="mt-5 flex flex-col items-stretch justify-between gap-3 border-t border-black/[0.06] pt-5 sm:mt-9 sm:flex-row sm:items-center sm:gap-4 sm:pt-6">
         <SubmitButton />
         <div className="inline-flex items-center justify-center gap-2 rounded-full border border-black/[0.05] bg-white/50 px-3.5 py-1.5 text-xs text-sg-dark-muted backdrop-blur-md shadow-sm">
           <ShieldCheck className="h-4 w-4 text-sg-red" />

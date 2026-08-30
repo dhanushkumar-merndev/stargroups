@@ -40,17 +40,17 @@ export function SiteFooter() {
         <div className="grid gap-10 pb-7 md:pb-12 lg:grid-cols-[1.2fr_1fr_0.7fr_1fr] lg:gap-8">
           {/* Brand + contact */}
           <div>
-            <Link href="/" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/5">
+            <Link href="/" className="group flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-105">
                 <Image
-                  src={GROUP_LOGO}
+                  src="/stargroups-dark.png"
                   alt="Star Groups"
                   width={36}
                   height={36}
-                  className="h-full w-full object-contain brightness-0 invert"
+                  className="h-full w-full object-contain"
                 />
               </span>
-              <span className="font-display text-lg font-bold tracking-tight text-white">
+              <span className="font-display text-lg font-bold tracking-tight text-white transition-colors duration-300 group-hover:text-sg-red-bright">
                 STAR GROUPS
               </span>
             </Link>

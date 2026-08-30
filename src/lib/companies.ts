@@ -66,6 +66,8 @@ export type Company = {
   stackingImage?: string;
   /** Optional project portfolio shown on the company detail page */
   projects?: Project[];
+  /** Introductory copy displayed above the completed-project portfolio */
+  projectIntro?: string;
   /** Published project totals; use when the full portfolio is not listed on the site yet */
   projectCounts?: ProjectCounts;
   /** Optional delivery milestone shown on the company detail page */
@@ -93,9 +95,10 @@ export const companies: Company[] = [
     summary:
       "Landscape design and execution — green spaces designed, built and maintained across Bangalore.",
     intro:
-      "Star Gardens handles the green half of the group's work: landscape design for residential and commercial developments, and plants on hire for offices, events and interiors across Bangalore.",
+      "Star Gardens delivers turnkey landscape design, execution and maintenance for homes, offices, resorts and commercial developments, alongside fully maintained plants on hire across Bangalore.",
     body: [
-      "Landscaping is the part of a development people feel before they can explain it. Star Gardens designs it as infrastructure rather than decoration — planting that suits the light it will actually get, and that someone can realistically maintain.",
+      "Rooted in the founder's family farming background and formally established in 2009, Star Gardens now works from its own production nursery and brings in specialty plants when a project calls for them.",
+      "The team takes turnkey responsibility from design through execution — including irrigation, hardscape, civil work, planting and installation — then stays involved through scheduled landscape maintenance.",
       "The plants-on-hire side puts the same thinking into spaces that need greenery without a permanent commitment: offices, showrooms, events and interiors, maintained on a rotating schedule so nothing is ever tired.",
     ],
     services: [
@@ -103,6 +106,11 @@ export const companies: Company[] = [
         title: "Landscape Design",
         description:
           "Planting plans, hardscape and layout for residential communities and commercial developments.",
+      },
+      {
+        title: "Landscape Execution",
+        description:
+          "Turnkey installation covering irrigation, civil work, hardscape, planting and final delivery from one team.",
       },
       {
         title: "Plants on Hire",
@@ -116,13 +124,61 @@ export const companies: Company[] = [
       },
     ],
     stats: [
-      { value: "2", label: "Service lines" },
-      { value: "Bengaluru", label: "Primary operating city" },
+      { value: "27,00,000", label: "Sq. ft. of green area covered" },
+      { value: "1,04,000", label: "Trees planted" },
+      { value: "3,40,000", label: "Shrubs planted" },
+      { value: "6,85,000", label: "Ground-cover plants" },
     ],
     website: "https://stargardens.in",
     icon: "leaf",
     logo: "/stargardens.png",
     stackingImage: "/stargardens-stacking.png",
+    projectIntro:
+      "A look at how Star Gardens designs, builds and maintains green spaces — from complete outdoor landscapes to flexible indoor planting for workplaces.",
+    projects: [
+      {
+        status: "finished",
+        title: "Landscape Design & Execution",
+        subtitle: "Turnkey outdoor spaces · Design, build and maintain",
+        description:
+          "Complete landscape delivery for homes, resorts, offices and commercial developments, bringing planting, irrigation, hardscape and ongoing care together through one accountable team.",
+        images: [
+          {
+            src: "/stargardens/projects/landscape-design.webp",
+            alt: "Completed lawn and landscape planting by Star Gardens",
+          },
+          {
+            src: "/stargardens/projects/terrace-garden.webp",
+            alt: "Terrace garden with seating, planters and a green wall",
+          },
+          {
+            src: "/stargardens/projects/vertical-garden.webp",
+            alt: "Indoor vertical garden installed by Star Gardens",
+          },
+        ],
+      },
+      {
+        status: "finished",
+        title: "Plants on Hire & Workplace Greenery",
+        subtitle: "Corporate interiors · Delivered, arranged and maintained",
+        description:
+          "Indoor and outdoor plants supplied for offices and commercial spaces with professional placement, scheduled care and replacement support that keeps every installation consistently healthy.",
+        images: [
+          {
+            src: "/stargardens/projects/plants-on-hire.webp",
+            alt: "Maintained indoor plants supplied on hire",
+          },
+          {
+            src: "/stargardens/projects/office-plants.webp",
+            alt: "Office workspace styled with indoor plants",
+          },
+          {
+            src: "/stargardens/projects/indoor-plants.webp",
+            alt: "Collection of decorative indoor plants and planters",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "starline-solutions",
@@ -152,8 +208,18 @@ export const companies: Company[] = [
         title: "Group Support",
         description: "The connective tissue that lets independent companies operate as one group.",
       },
+      {
+        title: "Process Coordination",
+        description:
+          "Coordinating shared workflows and communication so work moves smoothly across the group.",
+      },
     ],
-    stats: [{ value: "All", label: "Companies supported" }],
+    stats: [
+      { value: "All", label: "Group companies supported" },
+      { value: "Central", label: "Back-office operations" },
+      { value: "Shared", label: "Processes and resources" },
+      { value: "End-to-end", label: "Workflow coordination" },
+    ],
     icon: "network",
     logo: "/starlinesolution.png",
   },
@@ -202,6 +268,7 @@ export const companies: Company[] = [
       { value: "50+", label: "Films & shoots produced" },
       { value: "4K/8K", label: "Cinema standard production" },
       { value: "100%", label: "In-house post-production" },
+      { value: "360°", label: "Script-to-screen production" },
     ],
     icon: "clapperboard",
     logo: "/stargroups.png",
@@ -257,6 +324,7 @@ export const companies: Company[] = [
       { value: "6", label: "Core service lines" },
       { value: "8+", label: "Named enterprise clients" },
       { value: "1", label: "View of your whole business" },
+      { value: "Full-stack", label: "Web, mobile, CRM & ERP delivery" },
     ],
     website: "https://startechindia.com",
     email: "hello@startechindia.com",
@@ -301,12 +369,59 @@ export const companies: Company[] = [
       { value: "12+", label: "Projects delivered" },
       { value: "4", label: "Bengaluru zones served" },
       { value: "30–45", label: "Day average timeline" },
+      { value: "3", label: "Core modular categories" },
     ],
     website: "https://starspaces.in",
     phone: "+91 99163 06553",
     icon: "sofa",
     logo: "/starspaces.png",
     stackingImage: "/starspaces-stacking.png",
+    projectIntro:
+      "A selection of thoughtful Bengaluru interiors designed around daily routines, practical storage and a consistent material story from room to room.",
+    projects: [
+      {
+        status: "finished",
+        title: "Modular Kitchens & Smart Storage",
+        subtitle: "Kitchens and wardrobes · Planned for real daily routines",
+        description:
+          "Ergonomic kitchens and space-smart wardrobes shaped around how each family cooks, stores and moves, with durable finishes and carefully planned internal organisation.",
+        images: [
+          {
+            src: "/starspaces/projects/sage-kitchen.webp",
+            alt: "The Sage Kitchen by Star Spaces in Banashankari",
+          },
+          {
+            src: "/starspaces/projects/oak-olive-kitchen.webp",
+            alt: "Oak and Olive modular kitchen by Star Spaces in Jayanagar",
+          },
+          {
+            src: "/starspaces/projects/sliding-wardrobe.webp",
+            alt: "Quiet Sliding Storage wardrobe by Star Spaces in Banashankari",
+          },
+        ],
+      },
+      {
+        status: "finished",
+        title: "Living & Full-home Interiors",
+        subtitle: "Connected rooms · One cohesive interior vision",
+        description:
+          "Complete living and bedroom environments where lighting, furniture, storage and material choices work together, coordinated by one team from design through production and handover.",
+        images: [
+          {
+            src: "/starspaces/projects/quiet-living-room.webp",
+            alt: "A Quieter Living Room by Star Spaces on Kanakapura Road",
+          },
+          {
+            src: "/starspaces/projects/full-home-harmony.webp",
+            alt: "Full-home Harmony interior by Star Spaces in Jayanagar",
+          },
+          {
+            src: "/starspaces/projects/walnut-bedroom.webp",
+            alt: "The Walnut Bedroom by Star Spaces in Koramangala",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "star-growth-hub",
@@ -660,6 +775,8 @@ export const companies: Company[] = [
         ],
       },
     ],
+    projectIntro:
+      "Thoughtfully planned communities and farmland developments in Madikeri and Hoskote, created around quality infrastructure, natural surroundings and lasting value.",
     projectCounts: {
       finished: 14,
       ongoing: 3,
@@ -704,8 +821,18 @@ export const companies: Company[] = [
         title: "Buyer Advisory",
         description: "Guiding buyers to the right property, developer and segment for their needs.",
       },
+      {
+        title: "Sales Facilitation",
+        description:
+          "Coordinating site visits, negotiations and follow-ups from the first enquiry through closing.",
+      },
     ],
-    stats: [{ value: "2", label: "Segments covered" }],
+    stats: [
+      { value: "2", label: "Property segments covered" },
+      { value: "3", label: "Core service lines" },
+      { value: "End-to-end", label: "Buyer journey support" },
+      { value: "Group-backed", label: "Cross-company expertise" },
+    ],
     icon: "home",
     logo: "/macreality.png",
   },
@@ -745,11 +872,17 @@ export const companies: Company[] = [
         title: "Syndicate & Deal Structuring",
         description: "Co-investment partnerships and strategic deal structuring with institutional networks.",
       },
+      {
+        title: "Investment Due Diligence",
+        description:
+          "Evaluating markets, business models, unit economics and growth readiness before investment.",
+      },
     ],
     stats: [
       { value: "Early & Growth", label: "Investment stages" },
       { value: "8+", label: "Group synergies unlocked" },
       { value: "Bengaluru", label: "Primary investment hub" },
+      { value: "Hands-on", label: "Portfolio support model" },
     ],
     icon: "landmark",
     logo: "/stargroups.png",
@@ -790,6 +923,8 @@ export const companies: Company[] = [
     stats: [
       { value: "3", label: "Home & garden sourcing countries" },
       { value: "Europe", label: "Coffee & spice export markets" },
+      { value: "2-way", label: "Import and export trade" },
+      { value: "Doorstep", label: "Architect and developer delivery" },
     ],
     icon: "ship",
     logo: "/stargroups.png",

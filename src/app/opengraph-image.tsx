@@ -57,8 +57,8 @@ export default function OpenGraphImage() {
                 letterSpacing: "-1px",
               }}
             >
-              <span>STAR</span>
-              <span style={{ color: "#e51b2d", marginLeft: 10 }}>GROUPS</span>
+              <span style={{ color: "#e51b2d" }}>STAR</span>
+              <span style={{ marginLeft: 10 }}>GROUPS</span>
             </div>
 
             <div

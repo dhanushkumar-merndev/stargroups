@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import { Clock, MapPin } from "lucide-react";
 import { GROUP_ADDRESS, GROUP_HOURS } from "@/lib/companies";
 import { Reveal, SplitWords } from "@/components/animated-text";
 import { EnquiryForm } from "./enquiry-form";
+import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Enquiry",
   description:
     "Send Star Groups an enquiry — property, interiors, landscaping, software or growth marketing, all from one Bengaluru address.",
-};
+  path: "/enquiry",
+});
 
 export default function EnquiryPage() {
   return (

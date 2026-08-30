@@ -18,9 +18,9 @@ export function AboutSection() {
           <div>
             <p className="sg-eyebrow mb-5 text-sg-red">The Group</p>
             <SplitWords
-              text="Built like a constellation, not a hierarchy."
+              text="Independent companies, united by one standard."
               as="h2"
-              highlight={["constellation"]}
+              highlight={["one", "standard."]}
               className="max-w-[16ch] font-display text-3xl font-semibold text-sg-dark-ink md:text-5xl"
             />
             <Reveal delay={0.15}>

@@ -7,6 +7,7 @@ import { CompanyLogo } from "@/components/company-logo";
 import { CountUp, Reveal, SplitWords } from "@/components/animated-text";
 import { LeafPattern } from "@/components/leaf-pattern";
 import { ProjectShowcase } from "@/components/project-showcase";
+import { absoluteUrl, createPageMetadata, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return companies.map((c) => ({ slug: c.slug }));
@@ -19,14 +20,11 @@ export async function generateMetadata({
   const company = getCompany(slug);
   if (!company) return { title: "Company not found" };
 
-  return {
+  return createPageMetadata({
     title: company.name,
     description: company.summary,
-    openGraph: {
-      title: `${company.name} — Star Groups`,
-      description: company.summary,
-    },
-  };
+    path: `/companies/${company.slug}`,
+  });
 }
 
 export default async function CompanyPage({ params }: PageProps<"/companies/[slug]">) {
@@ -38,6 +36,30 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
   const next = companies[(index + 1) % companies.length];
   const prev = companies[(index - 1 + companies.length) % companies.length];
   const projectCounts = company.projectCounts ?? null;
+  const companyStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/companies/${company.slug}#organization`,
+    name: company.name,
+    url: absoluteUrl(`/companies/${company.slug}`),
+    logo: absoluteUrl(company.logo),
+    description: company.summary,
+    email: company.email,
+    telephone: company.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress:
+        "18, 1st Floor, 80 Feet Road, BSK 1st Stage, Srinivasnagar, Banashankari",
+      addressLocality: "Bengaluru",
+      addressRegion: "Karnataka",
+      postalCode: "560050",
+      addressCountry: "IN",
+    },
+    parentOrganization: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    sameAs: company.website ? [company.website] : undefined,
+  };
   const stats = projectCounts
     ? [
         {
@@ -57,6 +79,15 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(companyStructuredData).replace(
+            /</g,
+            "\\u003c",
+          ),
+        }}
+      />
       {/* ---------- Hero ---------- */}
       <section className="sg-grain relative overflow-hidden bg-white pb-20 pt-24 lg:pb-28 lg:pt-28">
         <div

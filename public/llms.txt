@@ -1,0 +1,38 @@
+# Star Groups
+
+> Star Groups is a fast-growing Bengaluru-based business group operating across real estate, interiors, landscaping, technology, media, marketing and venture capital.
+
+Star Groups builds and operates independent companies from Bengaluru, India. Each company has its own services and team while sharing the wider group's operational capabilities.
+
+## Primary Pages
+
+- [Home](https://www.stargroups.info/): Overview of Star Groups and its multi-sector businesses.
+- [About](https://www.stargroups.info/about): Background, operating model and leadership of Star Groups.
+- [Companies](https://www.stargroups.info/companies): Directory of all companies in the group.
+- [Contact](https://www.stargroups.info/contact): Bengaluru office details and contact form.
+- [Enquiry](https://www.stargroups.info/enquiry): Submit a project or partnership enquiry.
+
+## Companies
+
+- [Star Gardens](https://www.stargroups.info/companies/star-gardens): Landscape design, execution, maintenance and plants on hire.
+- [Starline Solutions](https://www.stargroups.info/companies/starline-solutions): Shared operational and business support for group companies.
+- [Star Production House](https://www.stargroups.info/companies/star-production-house): Commercial films, corporate media and post-production.
+- [Star Tech India](https://www.stargroups.info/companies/star-tech-india): Websites, applications, software systems and WhatsApp CRM.
+- [Star Spaces](https://www.stargroups.info/companies/star-spaces): Modular kitchens, wardrobes and smart residential interiors.
+- [Star Growth Hub](https://www.stargroups.info/companies/star-growth-hub): Marketing strategy, creative production and performance growth.
+- [Star Infra Developers](https://www.stargroups.info/companies/star-infra-developers): Residential, plotted and farmland property development.
+- [MAC Reality](https://www.stargroups.info/companies/mac-reality): Real estate promotion, channelling partnerships and buyer advisory.
+- [Star Venture Capital](https://www.stargroups.info/companies/star-capital-venture): Early-stage and growth investment with founder advisory.
+- [Starline Import & Export](https://www.stargroups.info/companies/starline-import-export): Home and garden sourcing plus coffee and spice exports.
+
+## Contact
+
+- Website: https://www.stargroups.info/
+- Email: stargrowthhub@gmail.com
+- Phone: +91 91509 66108
+- Address: 18, 1st Floor, 80 Feet Road, BSK 1st Stage, Srinivasnagar, Banashankari, Bengaluru, Karnataka 560050, India
+
+## Optional
+
+- [XML Sitemap](https://www.stargroups.info/sitemap.xml): Complete index of public website routes.
+- [Robots](https://www.stargroups.info/robots.txt): Crawler access policy and sitemap location.

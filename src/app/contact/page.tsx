@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock, MapPin } from "lucide-react";
 import { companies, GROUP_ADDRESS, GROUP_HOURS } from "@/lib/companies";
@@ -6,12 +5,14 @@ import { CompanyLogo } from "@/components/company-logo";
 import { Reveal, SplitWords } from "@/components/animated-text";
 import { LeafPattern } from "@/components/leaf-pattern";
 import { EnquiryForm } from "@/app/enquiry/enquiry-form";
+import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
   description:
     "Talk to Star Groups — one Bengaluru address for property, interiors, landscaping, software and growth marketing.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

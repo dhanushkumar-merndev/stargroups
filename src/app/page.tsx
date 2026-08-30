@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import Stacking from "@/components/stacking";
 import { Ticker } from "@/components/ticker";
@@ -6,6 +7,12 @@ import { CompaniesGrid } from "@/components/companies-grid";
 import { ResultsSection } from "@/components/results-section";
 import { Testimonials } from "@/components/testimonials";
 import { companies } from "@/lib/companies";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (

@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { AboutSection } from "@/components/about-section";
 import { Ticker } from "@/components/ticker";
 import { companies } from "@/lib/companies";
 import { Reveal, SplitWords } from "@/components/animated-text";
 import { LeafPattern } from "@/components/leaf-pattern";
+import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About",
   description:
-    "Star Groups is a Bengaluru family of companies built like a constellation, not a hierarchy — independent businesses held to one shared standard.",
-};
+    "Learn about Star Groups, a fast-growing Bengaluru-based business group building independent companies across multiple sectors.",
+  path: "/about",
+});
 
 const principles = [
   {
@@ -18,7 +19,7 @@ const principles = [
     body: "Every company runs its own team, clients and P&L. None of them has to wait on a head office to make a decision — but none of them has to solve a problem alone either.",
   },
   {
-    title: "One standard, six businesses",
+    title: "One standard, many businesses",
     body: "A landscaping crew and a software team have almost nothing in common operationally. What they share is what the group actually enforces: show up, quote honestly, and finish what you started.",
   },
   {
@@ -111,7 +112,7 @@ export default function AboutPage() {
                     cut. One founder, one standard, one roof in Bengaluru.
                   </p>
                   <p className="font-display text-xl font-semibold text-sg-dark-ink">
-                    10 companies, and still growing.
+                    {companies.length} companies, and still growing.
                   </p>
                 </div>
               </Reveal>

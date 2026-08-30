@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import { CompaniesGrid } from "@/components/companies-grid";
 import { Ticker } from "@/components/ticker";
 import { companies, flagships } from "@/lib/companies";
 import { Reveal, SplitWords } from "@/components/animated-text";
+import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Companies",
   description:
     "The full Star Groups family — real estate, infrastructure, interiors, technology, landscaping, trade, heavy equipment and growth marketing.",
-};
+  path: "/companies",
+});
 
 export default function CompaniesPage() {
   return (

@@ -80,13 +80,26 @@ const navLogoDisplay: Record<string, { className: string; sizes: string }> = {
   },
 };
 
+const navLogoAssets = [
+  {
+    slug: "star-groups",
+    src: "/company-logo/star-groups-logo.png",
+    sizes: "(max-width: 640px) 118px, 133px",
+  },
+  ...Object.entries(navLogos).map(([slug, src]) => ({
+    slug,
+    src,
+    sizes: navLogoDisplay[slug]?.sizes ?? "(max-width: 640px) 118px, 133px",
+  })),
+];
+
 export function SiteHeader() {
   const pathname = usePathname();
 
   // Determine logo based on the current page
   const currentCompany = companies.find((c) => pathname === `/companies/${c.slug}`);
-  const logoSrc = currentCompany ? navLogos[currentCompany.slug] : "/company-logo/star-groups-logo.png";
   const logoDisplay = currentCompany ? navLogoDisplay[currentCompany.slug] : undefined;
+  const activeLogoSlug = currentCompany?.slug ?? "star-groups";
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -132,7 +145,12 @@ export function SiteHeader() {
 
   // Ensure sidebar is closed whenever the route changes
   useEffect(() => {
-    closeAll();
+    const frame = window.requestAnimationFrame(() => {
+      setMenuOpen(false);
+      setMobileOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [pathname]);
 
   useEffect(() => {
@@ -212,14 +230,28 @@ export function SiteHeader() {
                 logoDisplay?.className ?? "w-[7.4rem] sm:w-[8.3rem]",
               )}
             >
-              <Image
-                src={logoSrc}
-                alt={currentCompany ? `${currentCompany.name} logo` : "Star Groups logo"}
-                fill
-                sizes={logoDisplay?.sizes ?? "(max-width: 640px) 118px, 133px"}
-                priority
-                className="object-contain object-left mix-blend-multiply"
-              />
+              {navLogoAssets.map((logo) => {
+                const isActive = logo.slug === activeLogoSlug;
+                const logoCompany = companies.find((company) => company.slug === logo.slug);
+
+                return (
+                  <Image
+                    key={logo.slug}
+                    src={logo.src}
+                    alt={isActive ? `${logoCompany?.name ?? "Star Groups"} logo` : ""}
+                    aria-hidden={!isActive}
+                    fill
+                    sizes={logo.sizes}
+                    preload={isActive}
+                    loading={isActive ? undefined : "eager"}
+                    fetchPriority={isActive ? "high" : "low"}
+                    className={cn(
+                      "object-contain object-left mix-blend-multiply",
+                      isActive ? "opacity-100" : "opacity-0",
+                    )}
+                  />
+                );
+              })}
             </motion.span>
           </Link>
 

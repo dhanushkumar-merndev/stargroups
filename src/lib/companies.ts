@@ -617,8 +617,8 @@ export const companies: Company[] = [
             alt: "Arkha Sanctuary typical floor plan",
           },
           {
-            src: "/starinfradeveloper/3.webp",
-            alt: "Arkha Sanctuary amenities and apartment layouts",
+            src: "/starinfradeveloper/arkha-sanctuary-amenities.webp",
+            alt: "Arkha Sanctuary amenities, apartment layouts and landscaped courtyard",
           },
         ],
       },
@@ -701,29 +701,29 @@ export const companies: Company[] = [
       },
       {
         status: "upcoming",
-        title: "Built Lux Con",
+        title: "Lux Build Con",
         subtitle: "Exquisite 3BHK & 4BHK apartments designed for elevated living.",
         description:
           "An upcoming G+14 ultra-luxury address in Happy Valley Layout, Uttarahalli. Spacious 3BHK and 4BHK homes pair refined design, premium finishes, natural light and private, elevated living.",
         images: [
           {
             src: "/starinfradeveloper/upcoming2-1.webp",
-            alt: "Built Lux Con proposed high-rise apartment entrance in Uttarahalli",
+            alt: "Lux Build Con proposed high-rise apartment entrance in Uttarahalli",
           },
           {
             src: "/starinfradeveloper/upcoming2-2.webp",
-            alt: "Built Lux Con proposed G+14 residential tower",
+            alt: "Lux Build Con proposed G+14 residential tower",
           },
           {
             src: "/starinfradeveloper/upcoming2-3.webp",
-            alt: "Built Lux Con proposed ultra-luxury apartment exterior",
+            alt: "Lux Build Con proposed ultra-luxury apartment exterior",
           },
         ],
         details: [
           {
             title: "Project Highlights",
             items: [
-              "Project Name: Built Lux Con",
+              "Project Name: Lux Build Con",
               "Location: Happy Valley Layout, Uttarahalli",
               "Project Type: Ultra-Luxury Residential Apartment Development",
               "Configurations: Spacious 3BHK & 4BHK Apartments",
@@ -765,7 +765,7 @@ export const companies: Company[] = [
           {
             title: "A New Standard of Luxury Living",
             description:
-              "More than just a residence, Built Lux Con is envisioned as an exclusive lifestyle destination where luxury, comfort, privacy and convenience come together.\n\nLocated in Happy Valley Layout, Uttarahalli, the project offers residents the advantage of a well-connected neighbourhood along with the tranquillity of a thoughtfully planned residential community. With premium 3BHK and 4BHK homes, a striking G+14 structure and world-class amenities, Built Lux Con is designed for families who aspire to live life at its finest.",
+              "More than just a residence, Lux Build Con is envisioned as an exclusive lifestyle destination where luxury, comfort, privacy and convenience come together.\n\nLocated in Happy Valley Layout, Uttarahalli, the project offers residents the advantage of a well-connected neighbourhood along with the tranquillity of a thoughtfully planned residential community. With premium 3BHK and 4BHK homes, a striking G+14 structure and world-class amenities, Lux Build Con is designed for families who aspire to live life at its finest.",
           },
         ],
         footer: [

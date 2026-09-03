@@ -27,7 +27,7 @@ export function ProjectCarousel({ images }: { images: ProjectImage[] }) {
       <div
         ref={scrollerRef}
         aria-label="Project image carousel"
-        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:-mx-10 lg:px-10 lg:scroll-pl-10"
+        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 lg:snap-none lg:scroll-auto"
       >
         {images.map((image, i) => (
           <a
@@ -36,14 +36,14 @@ export function ProjectCarousel({ images }: { images: ProjectImage[] }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Open ${image.alt} at full size`}
-            className="group relative aspect-[3508/2480] w-[min(82vw,22rem)] shrink-0 snap-start overflow-hidden rounded-lg bg-white shadow-[0_12px_30px_-24px_rgba(32,31,29,0.35)] transition-shadow duration-700 ease-out hover:shadow-[0_18px_42px_-24px_rgba(224,20,44,0.28)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sg-red motion-reduce:transition-none sm:w-[24rem]"
+            className="group relative aspect-[3508/2480] w-[min(82vw,22rem)] shrink-0 snap-start overflow-hidden rounded-lg bg-white shadow-[0_12px_30px_-24px_rgba(32,31,29,0.35)] transition-shadow duration-700 ease-out hover:shadow-[0_18px_42px_-24px_rgba(224,20,44,0.28)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sg-red motion-reduce:transition-none sm:w-[24rem] lg:w-full lg:shrink lg:snap-none"
           >
             <Image
               src={image.src}
               alt={image.alt}
               width={3508}
               height={2480}
-              sizes="(max-width: 640px) 82vw, 384px"
+              sizes="(max-width: 640px) 82vw, (max-width: 1023px) 384px, 31vw"
               className="block h-full w-full object-cover transition-[filter] duration-700 ease-out group-hover:brightness-[0.98] motion-reduce:transition-none"
               priority={i === 0}
             />
@@ -57,10 +57,7 @@ export function ProjectCarousel({ images }: { images: ProjectImage[] }) {
         ))}
       </div>
 
-      <div className="mt-1 flex items-center justify-between">
-        <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-sg-dark-muted">
-          Swipe to explore
-        </p>
+      <div className="mt-1 flex justify-end lg:hidden">
         <div className="flex gap-2">
           <button
             type="button"

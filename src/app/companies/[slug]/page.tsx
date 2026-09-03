@@ -7,6 +7,7 @@ import { CompanyLogo } from "@/components/company-logo";
 import { CountUp, Reveal, SplitWords } from "@/components/animated-text";
 import { LeafPattern } from "@/components/leaf-pattern";
 import { ProjectShowcase } from "@/components/project-showcase";
+import { StarlineServicesGallery } from "@/components/starline-services-gallery";
 import { absoluteUrl, createPageMetadata, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -103,12 +104,12 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
             All companies
           </Link>
 
-          <div className="flex items-center gap-4">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center sm:h-14 sm:w-14">
               <CompanyLogo company={company} className="h-full w-full" />
             </span>
-            <div>
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-sg-red">
+            <div className="min-w-0">
+              <p className="font-mono text-[0.58rem] leading-relaxed uppercase tracking-[0.14em] text-sg-red sm:text-[0.68rem] sm:tracking-[0.2em]">
                 {company.sector}
               </p>
             </div>
@@ -119,7 +120,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
             as="h1"
             trigger={false}
             delay={0.15}
-            className="mt-8 max-w-[16ch] font-display text-[clamp(2.6rem,7vw,5.2rem)] font-semibold text-sg-dark-ink"
+            className="mt-8 max-w-[16ch] font-display text-[clamp(2rem,8vw,5.2rem)] font-semibold text-sg-dark-ink sm:text-[clamp(2.6rem,7vw,5.2rem)]"
           />
 
           <Reveal delay={0.3}>
@@ -170,6 +171,8 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
           </div>
         </section>
       )}
+
+      {company.slug === "starline-import-export" && <StarlineServicesGallery />}
 
       {/* ---------- Delivery milestone ---------- */}
       {company.milestone && (

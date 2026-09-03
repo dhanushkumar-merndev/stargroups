@@ -841,7 +841,7 @@ export const companies: Company[] = [
     name: "Star Venture Capital",
     letter: "θ",
     letterName: "THETA",
-    sector: "Venture & Growth Capital",
+    sector: "Venture Capital",
     tagline: "Backing ambitious founders and scalable ventures.",
     summary:
       "Seed capital, growth investments and ecosystem leverage for early-stage ventures and breakout businesses.",
@@ -893,38 +893,66 @@ export const companies: Company[] = [
     letter: "κ",
     letterName: "KAPPA",
     sector: "Import & Export",
-    tagline: "Home & garden décor in, coffee & spices out.",
+    tagline: "Global sourcing. Reliable imports. Pan-India distribution.",
     summary:
-      "Starline Import & Export brings home and garden decorative products in from China, Vietnam and Indonesia to sell through its own portal, and exports coffee and spices to European countries.",
+      "An India-based sourcing, import and distribution company connecting businesses with manufacturers across China, Vietnam and Indonesia.",
     intro:
-      "Starline Import & Export runs trade in both directions. On the import side, it sources home and garden decorative products from China, Vietnam and Indonesia and sells them through its own portal — with doorstep delivery to help major architects and developers get décor to site without chasing suppliers themselves. On the export side, it ships coffee and spices out to European countries.",
+      "Starline Import & Export sources home, garden, landscape and decorative products from reliable manufacturers across China, Vietnam and Indonesia. Through Star Gardens, selected products are stocked and distributed across India, while businesses can also use the team as an end-to-end sourcing and import partner — from manufacturer identification and commercial negotiation through shipping, customs clearance and doorstep delivery.",
     body: [
-      "Good décor is only useful if it actually arrives. Starline Import & Export sources home and garden decorative pieces from China, Vietnam and Indonesia, lists them on its own portal, and delivers straight to the door — including direct-to-site delivery for architects and developers fitting out a project.",
-      "The other side of the business runs the opposite way: coffee and spices sourced and exported out to European countries.",
+      "International sourcing can create tremendous opportunities, but unknown suppliers, product quality, payments, documentation, freight and customs can make importing complicated. Starline Import & Export brings the complete process under one professional team.",
+      "The company supports businesses importing for resale, distribution, private-label development, e-commerce, commercial procurement and large projects — coordinating each requirement from the initial product brief until final delivery.",
+      "Its objective is simple: make international sourcing easier, safer and more accessible for Indian businesses, with transparent communication and local accountability at every major stage.",
     ],
     services: [
       {
-        title: "Home & Garden Décor Sourcing",
-        description: "Decorative products sourced from China, Vietnam and Indonesia.",
+        title: "Product & Manufacturer Sourcing",
+        description:
+          "Product identification, suitable manufacturer discovery, supplier evaluation and commercial comparison.",
       },
       {
-        title: "Own-Portal Retail",
-        description: "Sourced products listed and sold directly through our own portal.",
+        title: "Sampling, Customisation & Private Label",
+        description:
+          "Sample coordination, product modifications, branding, labels, packaging and OEM opportunities.",
       },
       {
-        title: "Architect & Developer Delivery",
-        description: "Doorstep delivery of décor straight to project sites for architects and developers.",
+        title: "Production & Quality Coordination",
+        description:
+          "Production follow-up, supplier verification and applicable pre-shipment quality inspection.",
       },
       {
-        title: "Coffee & Spice Exports",
-        description: "Coffee and spices exported to European countries.",
+        title: "Shipping, Customs & Delivery",
+        description:
+          "Sea or air freight, cargo consolidation, import documentation, customs clearance and inland delivery.",
+      },
+    ],
+    projects: [
+      {
+        status: "ongoing",
+        title: "Import & Distribution Operations",
+        subtitle: "From international cargo arrival to local doorstep delivery.",
+        description:
+          "Container receipt, unloading and cargo handling at Starline Import & Export's Bengaluru facility — part of an end-to-end import workflow that carries products from overseas manufacturers through to distribution across India.",
+        images: [
+          {
+            src: "/starline-import-&-export/1.webp",
+            alt: "Starline Import & Export team unloading imported cartons from a shipping container",
+          },
+          {
+            src: "/starline-import-&-export/2.webp",
+            alt: "Sealed import container outside the Starline Import & Export Bengaluru facility",
+          },
+          {
+            src: "/starline-import-&-export/3.webp",
+            alt: "Open shipping container ready for cargo unloading at Starline Import & Export",
+          },
+        ],
       },
     ],
     stats: [
-      { value: "3", label: "Home & garden sourcing countries" },
-      { value: "Europe", label: "Coffee & spice export markets" },
-      { value: "2-way", label: "Import and export trade" },
-      { value: "Doorstep", label: "Architect and developer delivery" },
+      { value: "3", label: "Primary sourcing markets" },
+      { value: "Pan-India", label: "Distribution and delivery" },
+      { value: "10", label: "Coordinated import stages" },
+      { value: "End-to-end", label: "Sourcing and import support" },
     ],
     icon: "ship",
     logo: "/stargroups.png",

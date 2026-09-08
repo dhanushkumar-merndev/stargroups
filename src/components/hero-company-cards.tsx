@@ -6,6 +6,7 @@ import { motion, useAnimation, useReducedMotion } from "motion/react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { companies } from "@/lib/companies";
 import { CompanyLogo } from "./company-logo";
+import { BrandCompanyName } from "./brand-company-name";
 
 // Each column reads as a gentle crescent hugging the left/right edge: the
 // `offset` (distance in from the edge) is largest at the top and bottom of
@@ -153,8 +154,8 @@ function HeroCompanyCard({
                 <CompanyLogo company={company} className="h-full w-full" />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="truncate font-display text-[0.72rem] font-bold text-sg-dark-ink transition-colors group-hover:text-sg-red">
-                  {company.name}
+                <h3 className="truncate font-display text-[0.72rem] font-bold text-sg-dark-ink">
+                  <BrandCompanyName slug={company.slug} name={company.name} />
                 </h3>
                 <p className="truncate text-[0.58rem] font-medium text-sg-red">
                   {detail.tagline}
@@ -194,8 +195,8 @@ export function HeroCompanyCardsMobile() {
                     <CompanyLogo company={company} className="h-full w-full" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="truncate font-display text-[0.92rem] font-bold text-sg-dark-ink transition-colors group-hover:text-sg-red">
-                      {company.name}
+                    <h3 className="truncate font-display text-[0.92rem] font-bold text-sg-dark-ink">
+                      <BrandCompanyName slug={company.slug} name={company.name} />
                     </h3>
                     <p className="truncate text-[0.72rem] font-medium text-sg-red">
                       {detail.tagline}

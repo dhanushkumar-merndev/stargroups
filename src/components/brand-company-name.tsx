@@ -85,6 +85,13 @@ export function BrandCompanyName({
           <span> Reality</span>
         </>
       );
+    case "land-in-coorg":
+      return (
+        <>
+          <span>Land in </span>
+          <span className="text-sg-red">Coorg</span>
+        </>
+      );
     default:
       return <span>{name}</span>;
   }

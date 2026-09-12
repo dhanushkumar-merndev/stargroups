@@ -112,6 +112,12 @@ export function GlobalNetwork({ cardRevealDelay = 2.75 }: GlobalNetworkProps) {
         side: "right",
         delay: 2.1,
       },
+      "land-in-coorg": {
+        eyebrow: "MANAGED FARMLANDS",
+        highlight: "Where the mist settles, your land begins.",
+        side: "right",
+        delay: 2.4,
+      },
     };
 
     return companies.map((c) => {

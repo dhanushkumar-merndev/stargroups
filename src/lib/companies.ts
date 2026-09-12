@@ -957,6 +957,79 @@ export const companies: Company[] = [
     icon: "ship",
     logo: "/stargroups.png",
   },
+  {
+    slug: "land-in-coorg",
+    name: "Land in Coorg",
+    letter: "λ",
+    letterName: "LAMBDA",
+    sector: "Managed Farmlands & Estates",
+    tagline: "Where the mist settles, your land begins.",
+    summary:
+      "Managed farmlands, coffee estate plots and private plantation retreats across the Western Ghats of Coorg.",
+    intro:
+      "Land in Coorg brings nature-focused land ownership to the Western Ghats — offering managed farmlands, coffee estate plots and private plantation retreats across Kodagu (Coorg), Karnataka.",
+    body: [
+      "Coorg is a landscape that cannot be manufactured: misty ridgelines, fertile volcanic soil, cool mountain elevation, and century-old coffee plantations shaded by native rainforest trees.",
+      "Land in Coorg curates and develops prime farmland parcels and estate plots for buyers looking to build private weekend retreats, invest in sustainable agriculture, or hold generational land.",
+      "Every development pairs natural beauty with managed infrastructure — concrete internal roads, plantation upkeep, clubhouse amenities, and clear legal partition — so owning land in the hills is as effortless as it is inspiring.",
+    ],
+    services: [
+      {
+        title: "Managed Farmlands",
+        description:
+          "Agricultural and plantation parcels with professional upkeep, internal CC roads, and private retreat spaces.",
+      },
+      {
+        title: "Coffee Estate Plots",
+        description:
+          "Exclusive plots embedded within working coffee plantations, offering natural serenity and community amenities.",
+      },
+      {
+        title: "Hill & Forest Retreats",
+        description:
+          "Scenic weekend parcels and estate homes surrounded by native Western Ghats forest and misty horizons.",
+      },
+      {
+        title: "Farm Management & Upkeep",
+        description:
+          "Turnkey agricultural management, harvest coordination, and estate maintenance for absentee owners.",
+      },
+    ],
+    stats: [
+      { value: "Madikeri", label: "Primary location hub" },
+      { value: "10+ Acres", label: "Curated developments" },
+      { value: "Western Ghats", label: "Altitude & climate" },
+      { value: "Turnkey", label: "Managed farmland upkeep" },
+    ],
+    website: "https://www.landincoorg.com",
+    phone: "+91 97430 30555",
+    icon: "compass",
+    logo: "/landincoorg.png",
+    stackingImage: "/landincoorg-stacking.png",
+    projects: [
+      {
+        status: "ongoing",
+        title: "Star Garden",
+        subtitle: "Madikeri · Premium Coffee Estate Plots",
+        description:
+          "Star Garden is a 10-acre premium coffee estate development comprising 30 exclusive plots, thoughtfully planned for peaceful living, nature-based investment, and long-term value appreciation.",
+        images: [
+          {
+            src: "/landincoorg/conceptual/star-garden-vision.webp",
+            alt: "Concept visualization of Star Garden coffee estate in Madikeri",
+          },
+          {
+            src: "/landincoorg/conceptual/curated-estate-plots.webp",
+            alt: "Curated estate plots in Coorg",
+          },
+          {
+            src: "/landincoorg/conceptual/countryside-homes.webp",
+            alt: "Countryside homes in the plantation hills of Coorg",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Companies that sit on the constellation ring (everything except the centre). */

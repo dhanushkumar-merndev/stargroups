@@ -30,6 +30,8 @@ const cardDetails = [
   // Row 5
   { slug: "star-capital-venture", eyebrow: "Venture Capital", tagline: "Seed & Growth Funding", side: "left", offset: "19%", top: "84%", delay: 0.48 },
   { slug: "starline-import-export", eyebrow: "Import & Export", tagline: "Global Sourcing & Freight", side: "right", offset: "19%", top: "84%", delay: 0.48 },
+  // Bottom Center
+  { slug: "land-in-coorg", eyebrow: "Managed Farmlands", tagline: "A Different Kind of Belonging", side: "center", offset: "0%", top: "86%", delay: 0.54 },
 ] as const;
 
 function RandomDrift({ children, enabled }: { children: ReactNode; enabled: boolean }) {
@@ -115,7 +117,9 @@ function HeroCompanyCard({
               x:
                 detail.side === "left"
                   ? `calc(50vw - ${parseFloat(detail.offset)}vw - 50%)`
-                  : `calc(-50vw + ${parseFloat(detail.offset)}vw + 50%)`,
+                  : detail.side === "right"
+                    ? `calc(-50vw + ${parseFloat(detail.offset)}vw + 50%)`
+                    : 0,
               y: `calc(50vh - ${parseFloat(detail.top)}vh - 50%)`,
             }
       }
@@ -134,7 +138,9 @@ function HeroCompanyCard({
       style={
         detail.side === "left"
           ? { left: detail.offset, top: detail.top }
-          : { right: detail.offset, top: detail.top }
+          : detail.side === "right"
+            ? { right: detail.offset, top: detail.top }
+            : { left: "calc(50% - clamp(8.5rem,11vw,13rem) / 2)", top: detail.top }
       }
       className="pointer-events-auto absolute w-[clamp(8.5rem,11vw,13rem)]"
     >

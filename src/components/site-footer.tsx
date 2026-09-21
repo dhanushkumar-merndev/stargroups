@@ -126,7 +126,7 @@ export function SiteFooter() {
                       rel="noopener noreferrer"
                       className="group inline-flex items-center gap-1.5 text-sm text-sg-muted transition-colors hover:text-sg-red-bright"
                     >
-                      {c.website!.replace("https://", "")}
+                      {c.website!.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
                   </li>

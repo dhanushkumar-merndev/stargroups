@@ -1001,11 +1001,10 @@ export const companies: Company[] = [
       { value: "Western Ghats", label: "Altitude & climate" },
       { value: "Turnkey", label: "Managed farmland upkeep" },
     ],
-    website: "https://www.landincoorg.com",
+    website: "https://landincoorg.com",
     phone: "+91 97430 30555",
     icon: "compass",
     logo: "/landincoorg.png",
-    stackingImage: "/landincoorg-stacking.png",
     projects: [
       {
         status: "ongoing",
@@ -1030,6 +1029,56 @@ export const companies: Company[] = [
       },
     ],
   },
+  {
+    slug: "star-managed-farmlands",
+    name: "Star Managed Farmlands",
+    letter: "μ",
+    letterName: "MU",
+    sector: "Managed Farmlands & Estates",
+    tagline: "Thoughtful farmland. A life closer to nature.",
+    summary:
+      "Managed farmlands and nature-first agricultural retreats designed for sustainable living and long-term land wealth.",
+    intro:
+      "Star Managed Farmlands curates, develops and manages eco-conscious farmland estates across Karnataka — offering fully managed agricultural parcels, plantation retreats and private nature escapes with turnkey maintenance and clear ownership.",
+    body: [
+      "Modern land ownership reimagined for city dwellers seeking an authentic connection with the soil without the operational burdens of day-to-day farm management.",
+      "Each estate is planned with eco-sensitive infrastructure — solar connectivity, internal natural roads, organic water retention systems, and curated plantation zones ranging from teak and sandalwood to coffee and native fruit orchards.",
+      "Professional agricultural teams oversee cultivation, periodic maintenance, and round-the-clock estate management, ensuring your farmland thrives effortlessly while appreciating across generations.",
+    ],
+    services: [
+      {
+        title: "Managed Agro-Farmlands",
+        description:
+          "Turnkey agricultural plots with complete plantation management, soil enrichment and harvesting support.",
+      },
+      {
+        title: "Eco-Retreat Estates",
+        description:
+          "Scenic farmland parcels tailored for sustainable weekend farmhouses, fruit orchards and private retreats.",
+      },
+      {
+        title: "Water & Soil Infrastructure",
+        description:
+          "Scientific rainwater harvesting, drip irrigation systems and organic permaculture practices across every parcel.",
+      },
+      {
+        title: "Turnkey Maintenance & Security",
+        description:
+          "Dedicated on-site farm workforce, gated perimeters and 24/7 security for complete peace of mind.",
+      },
+    ],
+    stats: [
+      { value: "100+", label: "Acres curated" },
+      { value: "100%", label: "Managed & maintained" },
+      { value: "Eco-Smart", label: "Sustainable infrastructure" },
+      { value: "Clear Title", label: "Legal partition & security" },
+    ],
+    website: "https://www.starmanagedfarmlands.com",
+    phone: "+91 91509 66108",
+    icon: "trees",
+    logo: "/starmanagedfarmlands.png",
+    stackingImage: "/starmanagedfarmlands-stacking.png",
+  },
 ];
 
 /** Companies that sit on the constellation ring (everything except the centre). */
@@ -1039,7 +1088,7 @@ export function getCompany(slug: string): Company | undefined {
   return companies.find((c) => c.slug === slug);
 }
 
-/** Companies with a live, visitable website. */
-export const flagships = companies.filter((c) => c.website);
+/** Companies with a live, visitable website featured in the stacking cards. */
+export const flagships = companies.filter((c) => c.website && c.stackingImage);
 
 export const sectors = Array.from(new Set(companies.map((c) => c.sector)));

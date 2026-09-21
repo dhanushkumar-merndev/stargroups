@@ -15,8 +15,10 @@ import { BrandCompanyName } from "./brand-company-name";
 // whole stack inward like the arc of a circle wrapping around the text,
 // instead of a straight line.
 const cardDetails = [
+  // Center Top
+  { slug: "star-gardens", eyebrow: "Landscaping", tagline: "Landscape & Plants on Hire", side: "center", offset: "0%", top: "10.5%", delay: 0.06 },
   // Row 1
-  { slug: "star-gardens", eyebrow: "Landscaping", tagline: "Landscape & Plants on Hire", side: "left", offset: "19%", top: "12%", delay: 0 },
+  { slug: "star-managed-farmlands", eyebrow: "Managed Farmlands", tagline: "A Life Closer to Nature", side: "left", offset: "19%", top: "12%", delay: 0 },
   { slug: "starline-solutions", eyebrow: "Operations & Support", tagline: "Shared Group Infrastructure", side: "right", offset: "19%", top: "12%", delay: 0 },
   // Row 2
   { slug: "star-production-house", eyebrow: "Media & Cinema", tagline: "Commercials & 4K Cinema", side: "left", offset: "11%", top: "30%", delay: 0.12 },

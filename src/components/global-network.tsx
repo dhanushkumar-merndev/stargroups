@@ -118,6 +118,12 @@ export function GlobalNetwork({ cardRevealDelay = 2.75 }: GlobalNetworkProps) {
         side: "right",
         delay: 2.4,
       },
+      "star-managed-farmlands": {
+        eyebrow: "MANAGED FARMLANDS",
+        highlight: "Thoughtful farmland. A life closer to nature.",
+        side: "left",
+        delay: 2.7,
+      },
     };
 
     return companies.map((c) => {
@@ -875,7 +881,7 @@ export function GlobalNetwork({ cardRevealDelay = 2.75 }: GlobalNetworkProps) {
           <div className="mb-2 flex items-center justify-between px-2">
             <span className="flex items-center gap-1.5 font-mono text-[0.65rem] font-semibold tracking-wider text-sg-dark-muted uppercase">
               <GlobeIcon className="h-3 w-3 text-sg-red" />
-              All 8 Ventures ({activeMobileIndex + 1}/8)
+              All {allCards.length} Ventures ({activeMobileIndex + 1}/{allCards.length})
             </span>
             <div className="flex items-center gap-1">
               <button

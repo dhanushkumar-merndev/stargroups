@@ -114,10 +114,10 @@ export function Hero() {
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
             <Link
-              href="/companies/star-growth-hub"
+              href="/about"
               className="inline-flex h-9 sm:h-10 shrink-0 items-center justify-center gap-2 rounded-full border border-sg-dark-ink px-3.5 sm:px-5 text-[0.72rem] sm:text-[0.82rem] font-semibold text-sg-dark-ink whitespace-nowrap transition-all duration-300 hover:bg-sg-dark-ink hover:text-white hover:shadow-md"
             >
-              Meet Star Growth Hub
+              Know about us
             </Link>
           </motion.div>
         </motion.div>

@@ -36,6 +36,7 @@ const navLogos: Record<string, string> = {
   "star-capital-venture": "/company-logo/star-venture-capital-logo.png",
   "starline-import-export": "/company-logo/starline-import-export-logo-v2.png",
   "land-in-coorg": "/company-logo/land-in-coorg-logo.png",
+  "star-managed-farmlands": "/company-logo/star-managed-farmlands-logo.png",
 };
 
 const navLogoDisplay: Record<string, { className: string; sizes: string }> = {
@@ -82,6 +83,10 @@ const navLogoDisplay: Record<string, { className: string; sizes: string }> = {
   "land-in-coorg": {
     className: "w-[8.8rem] sm:w-[9.8rem]",
     sizes: "(max-width: 640px) 140px, 156px",
+  },
+  "star-managed-farmlands": {
+    className: "w-[12.5rem] sm:w-[14.2rem]",
+    sizes: "(max-width: 640px) 200px, 227px",
   },
 };
 

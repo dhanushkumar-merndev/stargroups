@@ -92,6 +92,14 @@ export function BrandCompanyName({
           <span className="text-sg-red">Coorg</span>
         </>
       );
+    case "star-managed-farmlands":
+      return (
+        <>
+          <span>Star </span>
+          <span className="text-sg-red">Managed</span>
+          <span> Farmlands</span>
+        </>
+      );
     default:
       return <span>{name}</span>;
   }

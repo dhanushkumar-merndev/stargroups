@@ -139,7 +139,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
                   rel="noopener noreferrer"
                   className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-sg-red px-7 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-sg-red-bright hover:shadow-[0_10px_40px_-8px_rgba(224,20,44,0.6)] sm:w-auto"
                 >
-                  Visit {company.website.replace("https://", "")}
+                  Visit {company.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               ) : (
@@ -301,7 +301,7 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[slu
                           className="group flex items-center gap-3 text-sg-dark-ink transition-colors hover:text-sg-red"
                         >
                           <ArrowUpRight className="h-4 w-4 text-sg-red transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                          {company.website.replace("https://", "")}
+                          {company.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
                         </a>
                       )}
                     </div>

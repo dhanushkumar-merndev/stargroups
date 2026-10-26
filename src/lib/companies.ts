@@ -270,6 +270,7 @@ export const companies: Company[] = [
       { value: "100%", label: "In-house post-production" },
       { value: "360°", label: "Script-to-screen production" },
     ],
+    website: "https://starproductionhouse.com",
     icon: "clapperboard",
     logo: "/stargroups.png",
   },

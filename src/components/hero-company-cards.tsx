@@ -36,6 +36,40 @@ const cardDetails = [
   { slug: "land-in-coorg", eyebrow: "Managed Farmlands", tagline: "A Different Kind of Belonging", side: "center", offset: "0%", top: "86%", delay: 0.54 },
 ] as const;
 
+/**
+ * Hero cards go straight to the company's own website when it has one, and
+ * fall back to its page on this site otherwise. (The Companies dropdown in
+ * the header always stays on-site.)
+ */
+function CompanyCardLink({
+  company,
+  className,
+  children,
+}: {
+  company: (typeof companies)[number];
+  className: string;
+  children: ReactNode;
+}) {
+  if (company.website) {
+    return (
+      <a
+        href={company.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={`/companies/${company.slug}`} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 function RandomDrift({ children, enabled }: { children: ReactNode; enabled: boolean }) {
   const controls = useAnimation();
   const reduceMotion = useReducedMotion();
@@ -147,7 +181,7 @@ function HeroCompanyCard({
       className="pointer-events-auto absolute w-[clamp(8.5rem,11vw,13rem)]"
     >
       <RandomDrift enabled={hasPoppedOut}>
-        <Link href={`/companies/${company.slug}`} className="group block">
+        <CompanyCardLink company={company} className="group block">
           <div className="rounded-xl border border-sg-line-light bg-white/95 p-2 shadow-[0_10px_24px_-10px_rgba(0,0,0,0.14)] backdrop-blur-md transition-all duration-300 hover:border-sg-red/60 hover:shadow-[0_15px_32px_-12px_rgba(224,20,44,0.3)]">
             <div className="mb-0.5 flex items-center justify-between gap-1.5">
               <span className="flex items-center gap-1 font-mono text-[0.46rem] font-semibold tracking-wider text-sg-dark-muted uppercase">
@@ -171,7 +205,7 @@ function HeroCompanyCard({
               </div>
             </div>
           </div>
-        </Link>
+        </CompanyCardLink>
       </RandomDrift>
     </motion.div>
   );
@@ -188,7 +222,7 @@ export function HeroCompanyCardsMobile() {
 
         return (
           <div key={company.slug} className={index > 2 && !showAll ? "hidden sm:block" : undefined}>
-            <Link href={`/companies/${company.slug}`} className="group block text-left">
+            <CompanyCardLink company={company} className="group block text-left">
               <div className="rounded-2xl border border-sg-line-light bg-white/95 p-3 shadow-[0_10px_24px_-10px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-sg-red/60 hover:shadow-[0_15px_32px_-12px_rgba(224,20,44,0.3)]">
                 <div className="mb-2 flex items-center justify-between gap-2">
                   <span className="flex items-center gap-1.5 font-mono text-[0.6rem] font-semibold tracking-wider text-sg-dark-muted uppercase">
@@ -212,7 +246,7 @@ export function HeroCompanyCardsMobile() {
                   </div>
                 </div>
               </div>
-            </Link>
+            </CompanyCardLink>
           </div>
         );
       })}

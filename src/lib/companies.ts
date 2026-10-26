@@ -273,6 +273,7 @@ export const companies: Company[] = [
     website: "https://starproductionhouse.com",
     icon: "clapperboard",
     logo: "/stargroups.png",
+    stackingImage: "/starproductionhouse-stacking.png",
   },
   {
     slug: "star-tech-india",
